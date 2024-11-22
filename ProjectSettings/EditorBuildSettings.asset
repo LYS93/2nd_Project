@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Projct/Scenes/StartScene.unity
+    path: Assets/Project/Scenes/StartScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Projct/Scenes/StandKioskScene.unity
+    path: Assets/Project/Scenes/StandKioskScene.unity
     guid: dc0506c95d471f14280dad35a9ad779f
   - enabled: 1
-    path: Assets/Projct/Scenes/TableKioskScene.unity
+    path: Assets/Project/Scenes/TableKioskScene.unity
     guid: ca989f07d162dc5478eb77822ded10c5
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 72a13d98a3aa5354888c710ee2947f87, type: 2}
