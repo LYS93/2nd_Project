@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class Left_Hand : MonoBehaviour
+public class L_Hand : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

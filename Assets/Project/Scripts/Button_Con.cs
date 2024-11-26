@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class Button_Con : MonoBehaviour
 {
     GameObject menu;
+    public GameObject tutorial;
 
     void Start()
     {
         menu = GameObject.Find("SelectMenuScreen");
         menu.SetActive(false);
+        tutorial = GameObject.Find("TutorialScreen");
     }
 
     // Update is called once per frame
@@ -37,5 +39,13 @@ public class Button_Con : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+    public void TutorialOpen()
+    {
+        tutorial.SetActive(true);
+    }
+    public void TutorialClose()
+    {
+        tutorial.SetActive(false);
     }
 }

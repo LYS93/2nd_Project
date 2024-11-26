@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,12 +17,19 @@ public class Right_Hand : MonoBehaviour
     bool hitButton02;
     public UnityEvent<bool> changeColor03 = new UnityEvent<bool>();
     bool hitButton03;
-    Coroutine vibeHandle;
     public UnityEvent<bool> changeColor04 = new UnityEvent<bool>();
     bool hitButton04;
     public UnityEvent<bool> changeColor05 = new UnityEvent<bool>();
     bool hitButton05;
+    public UnityEvent<bool> changeColor06 = new UnityEvent<bool>();
+    bool hitButton06;
+    Coroutine vibeHandle;
 
+    GameObject startScreen;
+    GameObject selectScreen;
+    GameObject tutorialScreen;
+
+    bool optionSwitch;
 
     void Start()
     {
@@ -31,6 +39,12 @@ public class Right_Hand : MonoBehaviour
         transform.parent = Rhand.transform;
 
         lineR = GetComponent<LineRenderer>();
+
+        startScreen = GameObject.Find("StartScreen");
+        selectScreen = GameObject.Find("SelectScreen");
+        selectScreen.SetActive(false);
+        tutorialScreen = GameObject.Find("TutorialScreen");
+        tutorialScreen.SetActive(false);
     }
 
    
@@ -46,6 +60,14 @@ public class Right_Hand : MonoBehaviour
         {
             lineR.SetPosition(0, ray.origin);
             lineR.SetPosition(1, hit.point);
+
+            if(hit.collider.gameObject.CompareTag("startscreen"))
+            {
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.SetActive(false);
+                }
+            }
 
             if(hit.collider.gameObject.CompareTag("button01"))
             {
@@ -81,6 +103,21 @@ public class Right_Hand : MonoBehaviour
                 {
                     hitButton03 = true;
                     changeColor03.Invoke(hitButton03);
+                }
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+            }
+            
+            if (hit.collider.gameObject.CompareTag("off"))
+            {
+                if (hitButton06 == false)
+                {
+                    hitButton06 = true;
+                    changeColor06.Invoke(hitButton06);
                 }
 
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
@@ -153,6 +190,25 @@ public class Right_Hand : MonoBehaviour
         {
             hitButton05 = false;
             changeColor05.Invoke(hitButton05);
+        }
+        else if (hitButton06 == true)
+        {
+            hitButton06 = false;
+            changeColor06.Invoke(hitButton06);
+        }
+
+        if (!startScreen.activeSelf)
+        {
+            selectScreen.SetActive(true);
+
+            if (!tutorialScreen.activeSelf)
+            {
+                selectScreen.SetActive(true);
+            }
+            else if (tutorialScreen.activeSelf)
+            {
+                selectScreen.SetActive(false);
+            }
         }
     }
     IEnumerator VibeHandle()

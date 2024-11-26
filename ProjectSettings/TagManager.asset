@@ -9,6 +9,8 @@ TagManager:
   - button03
   - stand
   - table
+  - startscreen
+  - off
   layers:
   - Default
   - TransparentFX
