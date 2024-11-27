@@ -27,10 +27,10 @@ public class L_Hand : MonoBehaviour
     //GameObject startScreen;
     //GameObject selectScreen;
     //GameObject tutorialScreen;
-    GameObject optionScreen;
+    public GameObject optionScreen;
     GameObject cameraCenter;
 
-    bool optionSwitch; //옵션창 열림,닫힘을 확인하기위해 
+    public bool optionSwitch; //옵션창 열림,닫힘을 확인하기위해 
 
     void Start()
     {
