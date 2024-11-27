@@ -16,11 +16,11 @@ public class Button_Control : MonoBehaviour
     {
         
     }
-    public void Restart()
+    public void Restart() //시작화면으로 돌아가는 버튼
     {
         SceneManager.LoadScene("StartScene");
     }
-    public void Quit()
+    public void Quit() //프로그램 종료버튼
     {
         Application.Quit();
 

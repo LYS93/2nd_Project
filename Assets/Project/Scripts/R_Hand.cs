@@ -30,7 +30,7 @@ public class R_Hand : MonoBehaviour
     GameObject optionScreen;
     GameObject cameraCenter;
 
-    bool optionSwitch;
+    bool optionSwitch; //옵션창 열림,닫힘을 확인하기위해 
 
     void Start()
     {
@@ -47,7 +47,7 @@ public class R_Hand : MonoBehaviour
         //tutorialScreen = GameObject.Find("TutorialScreen");
         optionScreen = GameObject.Find("OptionScreen");
         cameraCenter = GameObject.Find("CenterEyeAnchor");
-        optionScreen.SetActive(false);
+        //optionScreen.SetActive(false); //시작할때 옵션창 비활성화
     }
 
 
@@ -72,7 +72,7 @@ public class R_Hand : MonoBehaviour
             //    }
             //}
 
-            if (hit.collider.gameObject.CompareTag("button01"))
+            if (hit.collider.gameObject.CompareTag("button01")) //시작으로 돌아가는 버튼
             {
                 if (hitButton01 == false)
                 {
@@ -86,7 +86,7 @@ public class R_Hand : MonoBehaviour
                     StartCoroutine(VibeHandle());
                 }
             }
-            if (hit.collider.gameObject.CompareTag("button02"))
+            if (hit.collider.gameObject.CompareTag("button02")) //프로그램을 종료하는 버튼
             {
                 if (hitButton02 == false)
                 {
@@ -214,24 +214,25 @@ public class R_Hand : MonoBehaviour
         //    selectScreen.SetActive(true);
         //}
 
-        if (optionScreen.activeSelf == true && optionSwitch == true)
-        {
-            if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
-            {
-                optionScreen.SetActive(false);
-                optionSwitch = false;
-            }
-        }
-        else if (optionScreen.activeSelf == false && optionSwitch == false)
-        {
-            if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
-            {
-                optionScreen.SetActive(true);
-                optionSwitch = true;
-                optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 5;
-                optionScreen.transform.forward = cameraCenter.transform.forward;
-            }
-        }
+        //if (optionScreen.activeSelf == true && optionSwitch == true) //옵션창이 열려있을때
+        //{
+        //    if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
+        //    {
+        //        optionScreen.SetActive(false);
+        //        optionSwitch = false;
+        //    }
+        //}
+        //else if (optionScreen.activeSelf == false && optionSwitch == false) //옵션창이 닫혀있을때
+        //{
+        //    if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
+        //    {
+        //        optionScreen.SetActive(true);
+        //        optionSwitch = true;
+        //        optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 5;
+        //        optionScreen.transform.forward = cameraCenter.transform.forward;
+        //        //옵션창이 현재 사용자가 바라보는 방향의 앞쪽에 나올수있도록
+        //    }
+        //}
     }
     IEnumerator VibeHandle()
     {

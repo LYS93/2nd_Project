@@ -11,7 +11,7 @@ public class Button_Con : MonoBehaviour
     void Start()
     {
         menu = GameObject.Find("SelectMenuScreen");
-        menu.SetActive(false);
+        menu.SetActive(false); //시작할때 스탠드,테이블 선택화면 비활성화
         tutorial = GameObject.Find("TutorialScreen");
     }
 
@@ -20,19 +20,19 @@ public class Button_Con : MonoBehaviour
     {
         
     }
-    public void MenuOpen()
+    public void MenuOpen() //스탠드,테이블 선택화면 열기버튼
     {
         menu.SetActive(true);
     }
-    public void OpenStand()
+    public void OpenStand() //스탠드키오스크버튼
     {
         SceneManager.LoadScene("StandKioskScene");
     }
-    public void OpenTable()
+    public void OpenTable() //테이블키오스크버튼
     {
         SceneManager.LoadScene("TableKioskScene");
     }
-    public void Quit()
+    public void Quit() //프로그램 종료버튼
     {
         Application.Quit();
 
@@ -40,11 +40,11 @@ public class Button_Con : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
-    public void TutorialOpen()
+    public void TutorialOpen() //튜토리얼화면 열기버튼
     {
         tutorial.SetActive(true);
     }
-    public void TutorialClose()
+    public void TutorialClose() //튜토리얼화면 닫기버튼
     {
         tutorial.SetActive(false);
     }
