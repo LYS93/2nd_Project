@@ -12,6 +12,7 @@ TagManager:
   - startscreen
   - off
   - option
+  - foot
   layers:
   - Default
   - TransparentFX
