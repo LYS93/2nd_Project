@@ -171,6 +171,13 @@ public class R_Hand : MonoBehaviour
             //        StartCoroutine(VibeHandle());
             //    }
             //}
+            if(hit.collider.gameObject.CompareTag("option"))
+            {
+                hitButton01 = false;
+                changeColor01.Invoke(hitButton01);
+                hitButton02 = false;
+                changeColor02.Invoke(hitButton02);
+            }
         }
         else if (hitButton01 == true)
         {
@@ -231,7 +238,7 @@ public class R_Hand : MonoBehaviour
             {
                 lHand.optionScreen.SetActive(true);
                 lHand.optionSwitch = true;
-                lHand.optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 5;
+                lHand.optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 1;
                 lHand.optionScreen.transform.forward = cameraCenter.transform.forward;
                 //옵션창이 현재 사용자가 바라보는 방향의 앞쪽에 나올수있도록
             }
