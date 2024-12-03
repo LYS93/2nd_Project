@@ -22,13 +22,6 @@ public class R_Hand : MonoBehaviour
 
     L_Hand lHand;
 
-    GameObject door;
-
-    bool startSwitch;
-    bool openDoor;
-    float openTime;
-    float doorMove;
-
     void Start()
     {
         Rhand = GameObject.Find("RightHandAnchor");
@@ -41,8 +34,6 @@ public class R_Hand : MonoBehaviour
         cameraCenter = GameObject.Find("CenterEyeAnchor");
         cameraRig = GameObject.Find("OVRCameraRig");
         lHand = GameObject.Find("leftHand").GetComponent<L_Hand>();
-
-        door = GameObject.Find("Cube.001");
 
         if (hitButton01 == true)
         {
@@ -64,24 +55,7 @@ public class R_Hand : MonoBehaviour
         lineR.SetPosition(0, ray.origin);
         lineR.SetPosition(1, ray.direction * 8);
         lineR.material.color = Color.cyan;
-
-        openTime += Time.deltaTime;
-        if (openTime >= 1f)
-        {
-            door.transform.Translate(-Time.deltaTime * doorMove, 0, 0);
-
-            if (door.transform.position.x >= -5f && startSwitch == true)
-            {
-                doorMove = -1;
-                startSwitch = false;
-            }
-            else if (door.transform.position.x < -5f && startSwitch == false)
-            {
-                doorMove = -1;
-                startSwitch = true;
-            }
-        }
-
+        
         if (Physics.Raycast(ray, out hit, 100f))
         {
             lineR.SetPosition(0, ray.origin);
