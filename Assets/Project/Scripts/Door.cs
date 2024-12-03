@@ -8,24 +8,48 @@ public class Door : MonoBehaviour
     float moveD;
     bool openSwitch;
 
+    R_Hand Rhand;
+
     void Start()
     {
+        Rhand = GameObject.Find("rightHand").GetComponent<R_Hand>();
         openSwitch = false;
     }
 
     
     void Update()
     {
-        transform.Translate(Time.deltaTime * moveD, 0, 0);
-        openTime += Time.deltaTime;
+        if (openSwitch == false)
+        {
+            transform.Translate(Time.deltaTime * moveD, 0, 0);
+            openTime += Time.deltaTime;
 
-        if (openTime >= 1f && openTime <2.7f)
-        {
-            moveD = 1;
+            if (openTime >= 1f && openTime < 2.7f)
+            {
+                moveD = 1;
+            }
+            if (openTime >= 2.7f)
+            {
+                moveD = 0;
+                openSwitch = true;
+                openTime = 0;
+            }
         }
-        if(openTime >= 2.7f)
+        if(Rhand.moveIn == true)
         {
-            moveD = 0;
+            transform.Translate(Time.deltaTime * moveD, 0, 0);
+            openTime += Time.deltaTime;
+
+            if (openTime >= 1f && openTime < 2.7f)
+            {
+                moveD = -1;
+            }
+            if (openTime >= 2.7f)
+            {
+                moveD = 0;
+                Rhand.moveIn = false;
+                openTime = 0;
+            }
         }
     }
 }

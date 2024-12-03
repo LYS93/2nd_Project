@@ -22,6 +22,8 @@ public class R_Hand : MonoBehaviour
 
     L_Hand lHand;
 
+    public bool moveIn;
+
     void Start()
     {
         Rhand = GameObject.Find("RightHandAnchor");
@@ -103,7 +105,19 @@ public class R_Hand : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     cameraRig.transform.position = new Vector3(0.5f, 0f, 0.6f);
+                    cameraRig.transform.Rotate(Vector3.up * 90);
+                    moveIn = true;
                     StartCoroutine(VibeHandle());
+                    if (hitButton01 == true)
+                    {
+                        hitButton01 = false;
+                        changeColor01.Invoke(hitButton01);
+                    }
+                    if (hitButton02 == true)
+                    {
+                        hitButton02 = false;
+                        changeColor02.Invoke(hitButton02);
+                    }
                 }
             }
         }
