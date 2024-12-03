@@ -52,7 +52,7 @@ public class L_Hand : MonoBehaviour
         ray.origin = transform.position;
         ray.direction = transform.forward;
         lineR.SetPosition(0, ray.origin);
-        lineR.SetPosition(1, ray.direction * 8);
+        lineR.SetPosition(1, ray.origin + ray.direction * 8);
         lineR.material.color = Color.cyan;
 
         if (Physics.Raycast(ray, out hit, 100f))
@@ -91,10 +91,16 @@ public class L_Hand : MonoBehaviour
 
             if (hit.collider.gameObject.CompareTag("option"))
             {
-                hitButton01 = false;
-                changeColor01.Invoke(hitButton01);
-                hitButton02 = false;
-                changeColor02.Invoke(hitButton02);
+                if (hitButton01 == true)
+                {
+                    hitButton01 = false;
+                    changeColor01.Invoke(hitButton01);
+                }
+                if (hitButton02 == true)
+                {
+                    hitButton02 = false;
+                    changeColor02.Invoke(hitButton02);
+                }
             }
         }
         else if (hitButton01 == true)
@@ -122,7 +128,7 @@ public class L_Hand : MonoBehaviour
             {
                 optionScreen.SetActive(true);
                 optionSwitch = true;
-                optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 1;
+                optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 0.7f;
                 optionScreen.transform.forward = cameraCenter.transform.forward;
                 //옵션창이 현재 사용자가 바라보는 방향의 앞쪽에 나올수있도록
             }

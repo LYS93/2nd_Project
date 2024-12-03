@@ -55,7 +55,7 @@ public class R_Hand : MonoBehaviour
         ray.origin = transform.position;
         ray.direction = transform.forward;
         lineR.SetPosition(0, ray.origin);
-        lineR.SetPosition(1, ray.direction * 8);
+        lineR.SetPosition(1, ray.origin + ray.direction * 8);
         lineR.material.color = Color.cyan;
         
         if (Physics.Raycast(ray, out hit, 100f))
@@ -94,17 +94,23 @@ public class R_Hand : MonoBehaviour
 
             if(hit.collider.gameObject.CompareTag("option"))
             {
-                hitButton01 = false;
-                changeColor01.Invoke(hitButton01);
-                hitButton02 = false;
-                changeColor02.Invoke(hitButton02);
+                if (hitButton01 == true)
+                {
+                    hitButton01 = false;
+                    changeColor01.Invoke(hitButton01);
+                }
+                if (hitButton02 == true)
+                {
+                    hitButton02 = false;
+                    changeColor02.Invoke(hitButton02);
+                }
             }
 
             if(hit.collider.gameObject.CompareTag("foot"))
             {
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
-                    cameraRig.transform.position = new Vector3(0.5f, 0f, 0.6f);
+                    cameraRig.transform.position = new Vector3(1.1f, 0f, 0.6f);
                     cameraRig.transform.Rotate(Vector3.up * 90);
                     moveIn = true;
                     StartCoroutine(VibeHandle());
@@ -146,7 +152,7 @@ public class R_Hand : MonoBehaviour
             {
                 lHand.optionScreen.SetActive(true);
                 lHand.optionSwitch = true;
-                lHand.optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 1;
+                lHand.optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 0.7f;
                 lHand.optionScreen.transform.forward = cameraCenter.transform.forward;
                 //옵션창이 현재 사용자가 바라보는 방향의 앞쪽에 나올수있도록
             }

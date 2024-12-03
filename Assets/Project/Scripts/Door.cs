@@ -24,11 +24,11 @@ public class Door : MonoBehaviour
             transform.Translate(Time.deltaTime * moveD, 0, 0);
             openTime += Time.deltaTime;
 
-            if (openTime >= 1f && openTime < 2.7f)
+            if (openTime >= 1f && openTime < 3.3f)
             {
                 moveD = 1;
             }
-            if (openTime >= 2.7f)
+            if (openTime >= 3.3f)
             {
                 moveD = 0;
                 openSwitch = true;
@@ -40,11 +40,11 @@ public class Door : MonoBehaviour
             transform.Translate(Time.deltaTime * moveD, 0, 0);
             openTime += Time.deltaTime;
 
-            if (openTime >= 1f && openTime < 2.7f)
+            if (openTime >= 1f && openTime < 3.3f)
             {
                 moveD = -1;
             }
-            if (openTime >= 2.7f)
+            if (openTime >= 3.3f)
             {
                 moveD = 0;
                 Rhand.moveIn = false;
