@@ -110,10 +110,13 @@ public class R_Hand : MonoBehaviour
             {
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
-                    cameraRig.transform.position = new Vector3(1.1f, 0f, 0.6f);
-                    cameraRig.transform.Rotate(Vector3.up * 90);
-                    moveIn = true;
-                    StartCoroutine(VibeHandle());
+                    if (moveIn == false)
+                    {
+                        cameraRig.transform.position = new Vector3(1.1f, 0f, 0.6f);
+                        cameraRig.transform.Rotate(Vector3.up * 90);
+                        moveIn = true;
+                        StartCoroutine(VibeHandle());
+                    }
                     if (hitButton01 == true)
                     {
                         hitButton01 = false;
@@ -125,6 +128,7 @@ public class R_Hand : MonoBehaviour
                         changeColor02.Invoke(hitButton02);
                     }
                 }
+
             }
         }
         else if (hitButton01 == true)

@@ -47,7 +47,6 @@ public class Door : MonoBehaviour
             if (openTime >= 3.3f)
             {
                 moveD = 0;
-                Rhand.moveIn = false;
                 openTime = 0;
             }
         }
