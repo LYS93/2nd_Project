@@ -112,7 +112,7 @@ public class R_Hand : MonoBehaviour
                 {
                     if (moveIn == false)
                     {
-                        cameraRig.transform.position = new Vector3(1.1f, 0f, 0.6f);
+                        cameraRig.transform.position = new Vector3(0.9f, 0.2f, 0.6f);
                         cameraRig.transform.Rotate(Vector3.up * 90);
                         moveIn = true;
                         StartCoroutine(VibeHandle());

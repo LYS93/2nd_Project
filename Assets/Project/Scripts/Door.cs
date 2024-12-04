@@ -7,6 +7,7 @@ public class Door : MonoBehaviour
     float openTime;
     float moveD;
     bool openSwitch;
+    bool stopSwitch;
 
     R_Hand Rhand;
 
@@ -35,7 +36,7 @@ public class Door : MonoBehaviour
                 openTime = 0;
             }
         }
-        if(Rhand.moveIn == true)
+        if(Rhand.moveIn == true && stopSwitch == false)
         {
             transform.Translate(Time.deltaTime * moveD, 0, 0);
             openTime += Time.deltaTime;
@@ -48,6 +49,7 @@ public class Door : MonoBehaviour
             {
                 moveD = 0;
                 openTime = 0;
+                stopSwitch = true;
             }
         }
     }
