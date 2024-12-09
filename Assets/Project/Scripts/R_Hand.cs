@@ -24,6 +24,8 @@ public class R_Hand : MonoBehaviour
 
     public bool moveIn;
 
+    Button_Control buttonCon;
+
     void Start()
     {
         Rhand = GameObject.Find("RightHandAnchor");
@@ -36,6 +38,8 @@ public class R_Hand : MonoBehaviour
         cameraCenter = GameObject.Find("CenterEyeAnchor");
         cameraRig = GameObject.Find("OVRCameraRig");
         lHand = GameObject.Find("leftHand").GetComponent<L_Hand>();
+
+        buttonCon = GameObject.Find("ButtonControl").GetComponent<Button_Control>();
 
         if (hitButton01 == true)
         {
@@ -127,6 +131,16 @@ public class R_Hand : MonoBehaviour
                         hitButton02 = false;
                         changeColor02.Invoke(hitButton02);
                     }
+                }
+
+            }
+
+            if (hit.collider.gameObject.CompareTag("panel01button01"))
+            {
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
                 }
 
             }
