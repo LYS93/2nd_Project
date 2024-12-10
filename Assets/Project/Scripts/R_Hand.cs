@@ -24,7 +24,7 @@ public class R_Hand : MonoBehaviour
 
     public bool moveIn;
 
-    Button_Control buttonCon;
+    //Button_Control buttonCon;
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class R_Hand : MonoBehaviour
         cameraRig = GameObject.Find("OVRCameraRig");
         lHand = GameObject.Find("leftHand").GetComponent<L_Hand>();
 
-        buttonCon = GameObject.Find("ButtonControl").GetComponent<Button_Control>();
+        //buttonCon = GameObject.Find("ButtonControl").GetComponent<Button_Control>();
 
         if (hitButton01 == true)
         {
