@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Button_Control : MonoBehaviour
 {
-    
+    public GameObject panelStart;
+    public GameObject panelMain;
     void Start()
     {
-        
+        panelStart = GameObject.Find("Panel(start)");
+        panelStart.SetActive(true);
+        panelMain = GameObject.Find("Panel(MainScreen)");
+        panelMain.SetActive(false);
     }
 
     
@@ -27,5 +31,11 @@ public class Button_Control : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+
+    public void StartMainScreen()
+    {
+        panelMain.SetActive(true);
+        panelStart.SetActive(false);
     }
 }

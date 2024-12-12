@@ -13,7 +13,11 @@ TagManager:
   - off
   - option
   - foot
-  - panel01button01
+  - home
+  - coffee
+  - drink
+  - food
+  - start
   layers:
   - Default
   - TransparentFX

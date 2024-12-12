@@ -135,7 +135,44 @@ public class R_Hand : MonoBehaviour
 
             }
 
-            if (hit.collider.gameObject.CompareTag("panel01button01"))
+            if (hit.collider.gameObject.CompareTag("start"))
+            {
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+
+            }
+
+            if (hit.collider.gameObject.CompareTag("home"))
+            {
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+
+            }
+            if (hit.collider.gameObject.CompareTag("coffee"))
+            {
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+
+            }
+            if (hit.collider.gameObject.CompareTag("drink"))
+            {
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+
+            }
+            if (hit.collider.gameObject.CompareTag("food"))
             {
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
