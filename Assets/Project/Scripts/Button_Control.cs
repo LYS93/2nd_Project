@@ -52,24 +52,36 @@ public class Button_Control : MonoBehaviour
     
     void Update()
     {
-        if (panelMain.activeSelf == true && startSwitch == false && panelCoffee == true)
+        if (panelMain.activeSelf == true && startSwitch == false && panelCoffee.activeSelf == true)
         {
             panelCoffeemenu.SetActive(true);
+            panelLattemenu.SetActive(false);
             panelTeamenu.SetActive(false);
+            panelAdemenu.SetActive(false);
+            panelNonCoffeemenu.SetActive(false);
+            panelFrappemenu.SetActive(false);
             panelFoodmenu.SetActive(false);
             startSwitch = true;
         }
-        if(panelMain.activeSelf == true && teaselectSwitch == false && panelTea == true)
+        if(panelMain.activeSelf == true && teaselectSwitch == false && panelTea.activeSelf == true)
         {
             panelCoffeemenu.SetActive(false);
+            panelLattemenu.SetActive(false);
             panelTeamenu.SetActive(true);
+            panelAdemenu.SetActive(false);
+            panelNonCoffeemenu.SetActive(false);
+            panelFrappemenu.SetActive(false);
             panelFoodmenu.SetActive(false);
             teaselectSwitch = true;
         }
-        if (panelMain.activeSelf == true && foodselectSwitch == false && panelFood == true)
+        if (panelMain.activeSelf == true && foodselectSwitch == false && panelFood.activeSelf == true)
         {
             panelCoffeemenu.SetActive(false);
+            panelLattemenu.SetActive(false);
             panelTeamenu.SetActive(false);
+            panelAdemenu.SetActive(false);
+            panelNonCoffeemenu.SetActive(false);
+            panelFrappemenu.SetActive(false);
             panelFoodmenu.SetActive(true);
             foodselectSwitch = true;
         }
@@ -137,11 +149,15 @@ public class Button_Control : MonoBehaviour
     {
         panelCoffeemenu.SetActive(true);
         panelLattemenu.SetActive(false);
+        panelTea.SetActive(false);
+        panelFood.SetActive(false);
     }
     public void LatteOpen()
     {
         panelCoffeemenu.SetActive(false);
         panelLattemenu.SetActive(true);
+        panelTea.SetActive(false);
+        panelFood.SetActive(false);
     }
     public void TeaOpen()
     {
