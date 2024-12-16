@@ -181,6 +181,15 @@ public class R_Hand : MonoBehaviour
                 }
 
             }
+            if (hit.collider.gameObject.CompareTag("plus"))
+            {
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+
+            }
         }
         else if (hitButton01 == true)
         {

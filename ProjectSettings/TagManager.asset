@@ -18,6 +18,7 @@ TagManager:
   - drink
   - food
   - start
+  - plus
   layers:
   - Default
   - TransparentFX

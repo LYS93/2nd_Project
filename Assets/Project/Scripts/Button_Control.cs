@@ -17,6 +17,7 @@ public class Button_Control : MonoBehaviour
     public GameObject panelNonCoffeemenu;
     public GameObject panelFrappemenu;
     public GameObject panelFoodmenu;
+    public GameObject panelOption;
 
     bool startSwitch;
     bool teaselectSwitch;
@@ -47,6 +48,8 @@ public class Button_Control : MonoBehaviour
         panelFrappemenu.SetActive(false);
         panelFoodmenu = GameObject.Find("Panel(FoodMenu)");
         panelFoodmenu.SetActive(false);
+        panelOption = GameObject.Find("Panel(Option)");
+        panelOption.SetActive(false);
     }
 
     
@@ -186,5 +189,40 @@ public class Button_Control : MonoBehaviour
         panelAdemenu.SetActive(false);
         panelNonCoffeemenu.SetActive(false);
         panelFrappemenu.SetActive(true);
+    }
+    public void Americano()
+    {
+        panelOption.SetActive(true);
+        panelCoffeemenu.SetActive(false);
+    }
+    public void Coldbrew()
+    {
+        panelOption.SetActive(true);
+        panelCoffeemenu.SetActive(false);
+    }
+    public void Espresso()
+    {
+        panelOption.SetActive(true);
+        panelCoffeemenu.SetActive(false);
+    }
+    public void Caffelatte()
+    {
+        panelOption.SetActive(true);
+        panelCoffeemenu.SetActive(false);
+    }
+    public void Cafemocha()
+    {
+        panelOption.SetActive(true);
+        panelCoffeemenu.SetActive(false);
+    }
+    public void Cappuccino()
+    {
+        panelOption.SetActive(true);
+        panelCoffeemenu.SetActive(false);
+    }
+    public void Caramelmacchiato()
+    {
+        panelOption.SetActive(true);
+        panelCoffeemenu.SetActive(false);
     }
 }
