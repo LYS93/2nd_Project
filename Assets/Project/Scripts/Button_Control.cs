@@ -120,6 +120,7 @@ public class Button_Control : MonoBehaviour
         panelAdemenu.SetActive(false);
         panelNonCoffeemenu.SetActive(false);
         panelFrappemenu.SetActive(false);
+        panelFoodmenu.SetActive(false);
         panelStart.SetActive(true);
         startSwitch = false;
     }
