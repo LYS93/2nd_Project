@@ -12,13 +12,16 @@ TagManager:
   - startscreen
   - off
   - option
-  - foot
-  - home
-  - coffee
-  - drink
-  - food
-  - start
-  - plus
+  - FootPrint
+  - KioskFront
+  - cateButton
+  - order
+  - cateChicken
+  - cateFriedrice
+  - cateSide
+  - cateNoodle
+  - bar
+  - goAd
   layers:
   - Default
   - TransparentFX
