@@ -12,6 +12,14 @@ TagManager:
   - startscreen
   - off
   - option
+  - FootPrint
+  - KioskFront
+  - cateButton
+  - order
+  - cateChicken
+  - cateFriedrice
+  - cateSide
+  - cateNoodle
   layers:
   - Default
   - TransparentFX

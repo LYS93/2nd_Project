@@ -12,7 +12,7 @@ public class UI_Con : MonoBehaviour
     {
         buttonImage = GetComponent<Image>();
         buttonImage.color = Color.gray; //각각 버튼들이 선택되지 않았을때 회색
-        buttonRigi = GetComponent<Rigidbody>();
+        //buttonRigi = GetComponent<Rigidbody>();
     }
 
     

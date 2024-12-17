@@ -49,6 +49,17 @@ public class L_Hand_2 : MonoBehaviour
         optionScreen = GameObject.Find("OptionScreen");
         cameraCenter = GameObject.Find("CenterEyeAnchor");
         optionScreen.SetActive(false); //시작할때 옵션창 비활성화
+
+        if (hitButton01 == true)
+        {
+            hitButton01 = false;
+            changeColor01.Invoke(hitButton01);
+        }
+        if (hitButton02 == true)
+        {
+            hitButton02 = false;
+            changeColor02.Invoke(hitButton02);
+        }
     }
 
     // Update is called once per frame
@@ -57,7 +68,7 @@ public class L_Hand_2 : MonoBehaviour
         ray.origin = transform.position;
         ray.direction = transform.forward;
         lineR.SetPosition(0, ray.origin);
-        lineR.SetPosition(1, ray.direction * 8);
+        lineR.SetPosition(1, ray.origin + ray.direction * 8);
         lineR.material.color = Color.cyan;
 
         if (Physics.Raycast(ray, out hit, 100f))

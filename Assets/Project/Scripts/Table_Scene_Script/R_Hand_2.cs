@@ -34,6 +34,21 @@ public class R_Hand_2 : MonoBehaviour
 
     L_Hand_2 lHand;
 
+    // 텔레포트
+    //Camera Player_camera;
+    //Vector3 MoveDirection = new Vector3(1, 2.58f, -1.54f);
+
+    //메서드 사용을 위해 스크립트 참조
+    Camera_Move cammove;
+    float TransTime = 1.0f; //카메라 부드럽게 변하기.
+    Coroutine myCoroutine;
+
+    Vector3 KioskDirection = new Vector3(1.86f, 2.3f, -1.22f);//코루틴을 위해 가져옴.
+    Vector3 TurnAngles = new Vector3(-1.5f, 1, 0.001f);//코루틴을 위해 가져옴.
+
+    BoxCollider BoxCol; // 키오스크 콜라이더 비활성화를 위한 메서드.
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +67,26 @@ public class R_Hand_2 : MonoBehaviour
         cameraCenter = GameObject.Find("CenterEyeAnchor");
         //optionScreen.SetActive(false); //시작할때 옵션창 비활성화
         lHand = GameObject.Find("leftHand").GetComponent<L_Hand_2>();
+
+        if (hitButton01 == true)
+        {
+            hitButton01 = false;
+            changeColor01.Invoke(hitButton01);
+        }
+        if (hitButton02 == true)
+        {
+            hitButton02 = false;
+            changeColor02.Invoke(hitButton02);
+        }
+
+
+        // 텔레포트
+        //Player_camera = GetComponent<Camera>();
+
+        //메서드 사용을 위해 스크립트 참조
+        cammove = GameObject.Find("OVRCameraRig").GetComponent<Camera_Move>();
+
+        BoxCol = GameObject.Find("KioskCube").GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -60,7 +95,7 @@ public class R_Hand_2 : MonoBehaviour
         ray.origin = transform.position;
         ray.direction = transform.forward;
         lineR.SetPosition(0, ray.origin);
-        lineR.SetPosition(1, ray.direction * 8);
+        lineR.SetPosition(1, ray.origin + ray.direction * 8);
         lineR.material.color = Color.cyan;
 
         if (Physics.Raycast(ray, out hit, 100f))
@@ -179,6 +214,132 @@ public class R_Hand_2 : MonoBehaviour
                 hitButton02 = false;
                 changeColor02.Invoke(hitButton02);
             }
+
+
+            if (hit.collider.gameObject.CompareTag("FootPrint")) //텔레포트. (내가 넣은 코드.)
+            {
+                //if (hitButton01 == false)
+                //{
+                //    hitButton01 = true;
+                //    changeColor01.Invoke(hitButton01);
+                //}
+
+                lineR.material.color = Color.red;
+                //lineR.endColor = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    //StartCoroutine(VibeHandle());
+                }
+            }
+
+            if (hit.collider.gameObject.CompareTag("KioskFront")) //카메라 키오스크 정면 이동. (내가 넣은 코드.)
+            {
+                //if (hitButton01 == false)
+                //{
+                //    hitButton01 = true;
+                //    changeColor01.Invoke(hitButton01);
+                //}
+
+                lineR.material.color = Color.red;
+                //lineR.endColor = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    BoxCol.enabled = false; //추가해야하는지 확인부터
+                    //cammove.Camera_moveToKiosk();//삭제가능.
+                    myCoroutine = StartCoroutine(cammove.changeToKiosk(KioskDirection, TurnAngles, TransTime));
+                    myCoroutine = null;
+                }
+            }
+
+            if (hit.collider.gameObject.CompareTag("order")) //키오스크 화면 전환. 광고> 메뉴화면. (내가 넣은 코드.)
+            {
+                //if (hitButton01 == false)
+                //{
+                //    hitButton01 = true;
+                //    changeColor01.Invoke(hitButton01);
+                //}
+
+                lineR.material.color = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    //StartCoroutine(VibeHandle());
+                }
+            }
+
+
+            if (hit.collider.gameObject.CompareTag("cateChicken")) //키오스크 메뉴 화면 전환. (내가 넣은 코드.)
+            {
+                //if (hitButton01 == false)
+                //{
+                //    hitButton01 = true;
+                //    changeColor01.Invoke(hitButton01);
+                //}
+
+                lineR.material.color = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    //StartCoroutine(VibeHandle());
+                }
+            }
+
+            if (hit.collider.gameObject.CompareTag("cateFriedrice")) //키오스크 메뉴 화면 전환. (내가 넣은 코드.)
+            {
+                //if (hitButton01 == false)
+                //{
+                //    hitButton01 = true;
+                //    changeColor01.Invoke(hitButton01);
+                //}
+
+                lineR.material.color = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    //StartCoroutine(VibeHandle());
+                }
+            }
+
+            if (hit.collider.gameObject.CompareTag("cateSide")) //키오스크 메뉴 화면 전환. (내가 넣은 코드.)
+            {
+                //if (hitButton01 == false)
+                //{
+                //    hitButton01 = true;
+                //    changeColor01.Invoke(hitButton01);
+                //}
+
+                lineR.material.color = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    //StartCoroutine(VibeHandle());
+                }
+            }
+
+            if (hit.collider.gameObject.CompareTag("cateNoodle")) //키오스크 메뉴 화면 전환. (내가 넣은 코드.)
+            {
+                //if (hitButton01 == false)
+                //{
+                //    hitButton01 = true;
+                //    changeColor01.Invoke(hitButton01);
+                //}
+
+                lineR.material.color = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    //StartCoroutine(VibeHandle());
+                }
+            }
+
         }
         else if (hitButton01 == true)
         {
@@ -244,6 +405,10 @@ public class R_Hand_2 : MonoBehaviour
                 //옵션창이 현재 사용자가 바라보는 방향의 앞쪽에 나올수있도록
             }
         }
+
+        
+
+
     }
 
     IEnumerator VibeHandle()
