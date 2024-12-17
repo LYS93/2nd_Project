@@ -193,36 +193,207 @@ public class Button_Control : MonoBehaviour
     public void Americano()
     {
         panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelCoffee.SetActive(false);
         panelCoffeemenu.SetActive(false);
     }
     public void Coldbrew()
     {
         panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelCoffee.SetActive(false);
         panelCoffeemenu.SetActive(false);
     }
     public void Espresso()
     {
         panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelCoffee.SetActive(false);
         panelCoffeemenu.SetActive(false);
     }
     public void Caffelatte()
     {
         panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelCoffee.SetActive(false);
         panelCoffeemenu.SetActive(false);
     }
     public void Cafemocha()
     {
         panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelCoffee.SetActive(false);
         panelCoffeemenu.SetActive(false);
     }
     public void Cappuccino()
     {
         panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelCoffee.SetActive(false);
         panelCoffeemenu.SetActive(false);
     }
     public void Caramelmacchiato()
     {
         panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelCoffee.SetActive(false);
         panelCoffeemenu.SetActive(false);
+    }
+    public void Off()
+    {
+        panelOption.SetActive(false);
+        panelMain.SetActive(true);
+        panelCoffee.SetActive(true);
+        panelCoffeemenu.SetActive(true);
+    }
+    public void Icetea()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Chamomile()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Peppermint()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Citron()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Grapefruit()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Whitegrape()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Lemon()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Chocolatte()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Strawberrylatte()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Grainlatte()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Greentealatte()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Sweetpotatolatte()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Strawberrysmoothie()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Blueberrysmoothie()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Planesmoothie()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Mangosmoothie()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Cookiefrappe()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Chocofrappe()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
+    }
+    public void Planebagle()
+    {
+        Debug.Log("dlatl");
+    }
+    public void Chococake()
+    {
+        Debug.Log("dlatl");
+    }
+    public void Milkcake()
+    {
+        Debug.Log("dlatl");
+    }
+    public void Croquemonsieur()
+    {
+        Debug.Log("dlatl");
+    }
+    public void Croiffle()
+    {
+        Debug.Log("dlatl");
+    }
+    public void Honeybread()
+    {
+        Debug.Log("dlatl");
     }
 }
