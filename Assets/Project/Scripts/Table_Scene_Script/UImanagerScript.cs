@@ -26,6 +26,9 @@ public class UImanagerScript : MonoBehaviour
     public GameObject[] aSide;
     public GameObject[] aNoodle;
 
+    public GameObject[] bar;
+    public GameObject gotoAd;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,10 +76,13 @@ public class UImanagerScript : MonoBehaviour
 
         // 초기 상태 설정
         ad_sc.SetActive(true);
+            gotoAd.SetActive(false);
             Chicken_sc.SetActive(false);
             Rice_sc.SetActive(false);
             Side_sc.SetActive(false);
             Noodle_sc.SetActive(false);
+        bar[0].SetActive(false); //닫혀있는 바의 모습
+            bar[1].SetActive(false); //열린 바의 모습
 
 
             cate_chick[0].color = changeColor;
@@ -128,6 +134,9 @@ public class UImanagerScript : MonoBehaviour
     {
         ad_sc.SetActive(false);
         Chicken_sc.SetActive(true);
+        gotoAd.SetActive(true);
+        bar[0].SetActive(true); //닫혀있는 바의 모습
+        bar[1].SetActive(false); //열린 바의 모습
 
 
         //for (int number = 0; number < cate_chick.Length; number++)
@@ -289,5 +298,33 @@ public class UImanagerScript : MonoBehaviour
         cate_side[1].color = returnColor;
         cate_side[2].color = returnColor;
         cate_side[3].color = returnColor;
+    }
+
+    public void Bar()
+    {
+        if (bar[0].activeSelf)
+        {
+            bar[0].SetActive(false);
+            bar[1].SetActive(true);
+        }
+        else
+        {
+            bar[1].SetActive(false);
+            bar[0].SetActive(true);
+        }
+    }
+
+    public void ReturnToAd()
+    {
+        gotoAd.SetActive(false);
+
+        bar[0].SetActive(false); 
+        bar[1].SetActive(false); 
+
+        Chicken_sc.SetActive(false);
+        Rice_sc.SetActive(false);
+        Side_sc.SetActive(false);
+        Noodle_sc.SetActive(false);
+        ad_sc.SetActive(true);
     }
 }

@@ -248,9 +248,9 @@ public class R_Hand_2 : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     BoxCol.enabled = false; //추가해야하는지 확인부터
-                    //cammove.Camera_moveToKiosk();//삭제가능.
-                    myCoroutine = StartCoroutine(cammove.changeToKiosk(KioskDirection, TurnAngles, TransTime));
-                    myCoroutine = null;
+                    cammove.Camera_moveToKiosk();//카메라 이동.
+                    //myCoroutine = StartCoroutine(cammove.changeToKiosk(KioskDirection, TurnAngles, TransTime));
+                    //myCoroutine = null;
                 }
             }
 
@@ -340,6 +340,29 @@ public class R_Hand_2 : MonoBehaviour
                 }
             }
 
+            if (hit.collider.gameObject.CompareTag("bar")) //장바구니. (내가 넣은 코드.)
+            {
+
+                lineR.material.color = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    //StartCoroutine(VibeHandle());
+                }
+            }
+
+            if (hit.collider.gameObject.CompareTag("goAd")) //키오스크 처음화면. (내가 넣은 코드.)
+            {
+
+                lineR.material.color = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    //StartCoroutine(VibeHandle());
+                }
+            }
         }
         else if (hitButton01 == true)
         {

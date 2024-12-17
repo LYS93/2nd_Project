@@ -14,7 +14,7 @@ public class Camera_Move : MonoBehaviour
     GameObject Door;
     float speed;
 
-    bool iscameramove = false; // 자동문
+    public bool iscameramove = false; // 자동문
     bool iscameramoved = false; // 키오스크
 
     // Start is called before the first frame update
@@ -57,41 +57,41 @@ public class Camera_Move : MonoBehaviour
 
     }
 
-    //public void Camera_moveToKiosk() //키오스크 정면 바라보는 메서드
-    //{
-    //    transform.position = KioskDirection;
-    //    transform.eulerAngles = new Vector3(-1.5f, 1, 0.001f);
-
-    //    //iscameramove = true;
-
-
-    //}
-
-    public IEnumerator changeToKiosk(Vector3 _addVector3, Vector3 _addAngles, float _duration)
+    public void Camera_moveToKiosk() //키오스크 정면 바라보는 메서드
     {
-        float time = 0;
-        Vector3 start_position = transform.position;
-        Vector3 end_position = _addVector3;
-        Vector3 start_angle = transform.eulerAngles;
-        Vector3 end_angle = _addAngles;
+        transform.position = KioskDirection;
+        transform.eulerAngles = new Vector3(-1.5f, 1, 0.001f);
 
-        if (iscameramoved == false)
-        {
-            iscameramoved = true;
-            
-            while (time < _duration)
-            {
-                transform.position = Vector3.Lerp(start_position, end_position, time / _duration);
-                transform.eulerAngles = Vector3.Lerp(start_angle, end_angle, time / _duration);
-                time += Time.deltaTime;
-                yield return null;
-            }
-            transform.position = end_position;
-            transform.eulerAngles = end_angle;
+        //iscameramove = true;
 
-        }
 
-        ///*myCoroutine = null;*/
     }
+
+    //public IEnumerator changeToKiosk(Vector3 _addVector3, Vector3 _addAngles, float _duration) //Lerp로 부드럽게 화면전환.
+    //{
+    //    float time = 0;
+    //    Vector3 start_position = transform.position;
+    //    Vector3 end_position = _addVector3;
+    //    Vector3 start_angle = transform.eulerAngles;
+    //    Vector3 end_angle = _addAngles;
+
+    //    if (iscameramoved == false)
+    //    {
+    //        iscameramoved = true;
+
+    //        while (time < _duration)
+    //        {
+    //            transform.position = Vector3.Lerp(start_position, end_position, time / _duration);
+    //            transform.eulerAngles = Vector3.Lerp(start_angle, end_angle, time / _duration);
+    //            time += Time.deltaTime;
+    //            yield return null;
+    //        }
+    //        transform.position = end_position;
+    //        transform.eulerAngles = end_angle;
+
+    //    }
+
+    //    ///*myCoroutine = null;*/
+    //}
 
 }

@@ -9,6 +9,8 @@ public class Door_Move : MonoBehaviour
     GameObject Camera_Pos;
     Camera Player_cam;
 
+    Camera_Move camM;
+
     
 
     // Start is called before the first frame update
@@ -26,6 +28,8 @@ public class Door_Move : MonoBehaviour
         Door = GameObject.Find("door");
         Door.transform.position = Vector3.zero;
         //Door.transform.position = new Vector3(3.2f, 0, 0);
+
+        camM = GameObject.Find("OVRCameraRig").GetComponent<Camera_Move>();
     }
 
     // Update is called once per frame
@@ -33,10 +37,13 @@ public class Door_Move : MonoBehaviour
     {
         //if() 만약 발바닥 표시를 안눌렀다면 문이 천천히 열리고
         //else{} 문이 닫히도록 설정.
-        if (Door.transform.position.x < 3.2f) // 3.2의 값 이전까지 문 열림.
+        if (camM.iscameramove == false)
         {
-            speed += Time.deltaTime;
-            Door.transform.Translate(speed * 0.3f * Time.deltaTime, 0, 0);
+            if (Door.transform.position.x < 3.2f) // 3.2의 값 이전까지 문 열림.
+            {
+                speed += Time.deltaTime;
+                Door.transform.Translate(speed * 0.3f * Time.deltaTime, 0, 0);
+            }
         }
 
         //if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
