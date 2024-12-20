@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Button_Control : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class Button_Control : MonoBehaviour
     bool startSwitch;
     bool teaselectSwitch;
     bool foodselectSwitch;
+
+    public Text priceText;
+
+    int lastPrice = 0;
+    int drinkPrice;
+    int optionPrice;
     void Start()
     {
         panelStart = GameObject.Find("Panel(start)");
@@ -88,6 +95,16 @@ public class Button_Control : MonoBehaviour
             panelFoodmenu.SetActive(true);
             foodselectSwitch = true;
         }
+
+        lastPrice = drinkPrice + optionPrice;
+        priceText.text = lastPrice.ToString();
+        if (panelOption.activeSelf == false)
+        {
+            //lastPrice = 0;
+            //drinkPrice = 0;
+            //optionPrice = 0;
+        }
+
     }
     public void Restart() //시작화면으로 돌아가는 버튼
     {
@@ -197,6 +214,7 @@ public class Button_Control : MonoBehaviour
         panelMain.SetActive(false);
         panelCoffee.SetActive(false);
         panelCoffeemenu.SetActive(false);
+        drinkPrice = 2000;
     }
     public void Coldbrew()
     {
@@ -396,5 +414,30 @@ public class Button_Control : MonoBehaviour
     public void Honeybread()
     {
         Debug.Log("dlatl");
+    }
+    public void Tumbler()
+    {
+        Debug.Log("option");
+    }
+    public void Mild()
+    {
+        Debug.Log("option");
+    }
+    public void Shot()
+    {
+        Debug.Log("option");
+        optionPrice = 500;
+    }
+    public void Cream()
+    {
+        Debug.Log("option");
+    }
+    public void Order()
+    {
+        Debug.Log("option");
+    }
+    public void Resetoption()
+    {
+        Debug.Log("option");
     }
 }
