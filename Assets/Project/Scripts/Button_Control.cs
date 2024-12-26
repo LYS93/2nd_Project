@@ -65,7 +65,7 @@ public class Button_Control : MonoBehaviour
         panelOption = GameObject.Find("Panel(Option)");
         panelOption.SetActive(false);
 
-        GameObject.Find("TotalPriceText").GetComponent<Text>().text = "0";
+        GameObject.Find("TotalPriceText").GetComponent<Text>().text = "";
         orderItems.Clear();
         totalPrice = 0;
     }
@@ -554,7 +554,7 @@ public class Button_Control : MonoBehaviour
     {
         Debug.Log("option");
     }
-    public void AddOrder(string menuName, int price)
+    void AddOrder(string menuName, int price)
     {
         // 프리팹 생성
         GameObject newItem = Instantiate(textPrefab, contentParent);
@@ -563,12 +563,15 @@ public class Button_Control : MonoBehaviour
         Text leftText = newItem.transform.Find("LeftText").GetComponent<Text>();
         Text rightText = newItem.transform.Find("RightText").GetComponent<Text>();
 
-        leftText.text = menuName; // 메뉴 이름
-        rightText.text = price.ToString(); // 가격
+        leftText.text = menuName;
+        rightText.text = price.ToString();
 
         // 삭제 버튼 이벤트 연결
         Button removeButton = newItem.transform.Find("RemoveButton").GetComponent<Button>();
         removeButton.onClick.AddListener(() => RemoveOrderButton(newItem)); // 프리팹 오브젝트 전달
+
+        // 콜라이더 추가 (VR에서 클릭 가능하게 만듬)
+        removeButton.gameObject.AddComponent<BoxCollider>(); // 버튼에 콜라이더 추가
 
         // 주문 리스트에 추가
         orderItems.Add(newItem);
