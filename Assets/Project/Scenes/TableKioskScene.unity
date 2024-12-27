@@ -28162,6 +28162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b436bd41e2afeb479370853fdb11464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player_camera: {fileID: 0}
   iscameramove: 0
 --- !u!1001 &1158799464
 PrefabInstance:
@@ -53181,6 +53182,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1260891599}
+        m_TargetAssemblyTypeName: PanelmanagerScript, Assembly-CSharp
+        m_MethodName: panelToZero
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2137691708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54131,7 +54144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 13e8ff6e290622a4aa39ccc20bc1348e, type: 2}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -54613,7 +54626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 13e8ff6e290622a4aa39ccc20bc1348e, type: 2}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}

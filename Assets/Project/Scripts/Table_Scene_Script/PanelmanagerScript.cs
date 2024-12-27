@@ -143,27 +143,33 @@ public class PanelmanagerScript : MonoBehaviour
         panel21Rect = panel21.GetComponent<RectTransform>();
 
         // 패널 비활성화
-        panel1.SetActive(false);
-        panel2.SetActive(false);
-        panel3.SetActive(false);
-        panel4.SetActive(false);
-        panel5.SetActive(false);
-        panel6.SetActive(false);
-        panel7.SetActive(false);
-        panel8.SetActive(false);
-        panel9.SetActive(false);
-        panel10.SetActive(false);
-        panel11.SetActive(false);
-        panel12.SetActive(false);
-        panel13.SetActive(false);
-        panel14.SetActive(false);
-        panel15.SetActive(false);
-        panel16.SetActive(false);
-        panel17.SetActive(false);
-        panel18.SetActive(false);
-        panel19.SetActive(false);
-        panel20.SetActive(false);
-        panel21.SetActive(false);
+        panelSetfalse();
+
+        //// 패널 비활성화
+        //panel1.SetActive(false);
+        //panel2.SetActive(false);
+        //panel3.SetActive(false);
+        //panel4.SetActive(false);
+        //panel5.SetActive(false);
+        //panel6.SetActive(false);
+        //panel7.SetActive(false);
+        //panel8.SetActive(false);
+        //panel9.SetActive(false);
+        //panel10.SetActive(false);
+        //panel11.SetActive(false);
+        //panel12.SetActive(false);
+        //panel13.SetActive(false);
+        //panel14.SetActive(false);
+        //panel15.SetActive(false);
+        //panel16.SetActive(false);
+        //panel17.SetActive(false);
+        //panel18.SetActive(false);
+        //panel19.SetActive(false);
+        //panel20.SetActive(false);
+        //panel21.SetActive(false);
+
+        //// 패널 초기화
+        //panelToZero();
 
         confirmPanel.SetActive(false);
 
@@ -192,7 +198,7 @@ public class PanelmanagerScript : MonoBehaviour
         errorMessage.gameObject.SetActive(false); // 오류 메시지 초기에는 숨김
 
         // 게임 시작 시 PlayerPrefs 초기화
-        PlayerPrefs.DeleteAll();  // 모든 PlayerPrefs 데이터 삭제
+        P_PrefsDelete();
 
         // 저장된 값 불러오기
         LoadPanelValues();
@@ -1638,7 +1644,7 @@ public class PanelmanagerScript : MonoBehaviour
             priceResultText += panel12Quantity * panel12Price + "원" + "\n";
         }
         // panel13의 수량이 0이 아니면 결과 텍스트에 추가
-        if (panel3Quantity > 0)
+        if (panel13Quantity > 0)
         {
             nameResultText += "스팸주먹밥" + "\n";
             quantityResultText += panel13Quantity + "개" + "\n";
@@ -1921,6 +1927,65 @@ public class PanelmanagerScript : MonoBehaviour
     }
 
 
+    // 패널 비활성화
+    public void panelSetfalse()
+    {
+        panel1.SetActive(false);
+        panel2.SetActive(false);
+        panel3.SetActive(false);
+        panel4.SetActive(false);
+        panel5.SetActive(false);
+        panel6.SetActive(false);
+        panel7.SetActive(false);
+        panel8.SetActive(false);
+        panel9.SetActive(false);
+        panel10.SetActive(false);
+        panel11.SetActive(false);
+        panel12.SetActive(false);
+        panel13.SetActive(false);
+        panel14.SetActive(false);
+        panel15.SetActive(false);
+        panel16.SetActive(false);
+        panel17.SetActive(false);
+        panel18.SetActive(false);
+        panel19.SetActive(false);
+        panel20.SetActive(false);
+        panel21.SetActive(false);
+    }
+    
+
+    // 게임 시작 시/ 광고화면으로 넘어갈 시 panel초기화
+    public void panelToZero()
+    {
+        XbuttonClick00(panel1);
+        XbuttonClick01(panel2);
+        XbuttonClick02(panel3);
+        XbuttonClick03(panel4);
+        XbuttonClick04(panel5);
+        XbuttonClick05(panel6);
+        XbuttonClick06(panel7);
+        XbuttonClick07(panel8);
+        XbuttonClick08(panel9);
+        XbuttonClick09(panel10);
+        XbuttonClick10(panel11);
+        XbuttonClick11(panel12);
+        XbuttonClick12(panel13);
+        XbuttonClick13(panel14);
+        XbuttonClick14(panel15);
+        XbuttonClick15(panel16);
+        XbuttonClick16(panel17);
+        XbuttonClick17(panel18);
+        XbuttonClick18(panel19);
+        XbuttonClick19(panel20);
+        XbuttonClick20(panel21);
+    }
+
+    // 게임 시작 시 PlayerPrefs 초기화
+    public void P_PrefsDelete()
+    {
+        // 메서드로 만들어서 UImanager에서 참조할 수 있도록.
+        PlayerPrefs.DeleteAll();  // 모든 PlayerPrefs 데이터 삭제
+    }
 
 
 

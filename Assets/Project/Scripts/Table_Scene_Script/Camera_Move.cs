@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Camera_Move : MonoBehaviour
 {
-    OVRCameraRig Player_camera;
+    public OVRCameraRig Player_camera;
 
     Vector3 startcamPos = new Vector3(-1, 3.5f, -8);
     Vector3 startcamRot = new Vector3(4.33f, 0f, 0f);
