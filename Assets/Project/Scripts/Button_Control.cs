@@ -22,6 +22,7 @@ public class Button_Control : MonoBehaviour
     public GameObject panelFoodmenu;
     public GameObject panelOption;
     public GameObject panelHere;
+    public GameObject panelCard;
 
     bool startSwitch;
     bool teaselectSwitch;
@@ -69,6 +70,8 @@ public class Button_Control : MonoBehaviour
         panelOption.SetActive(false);
         panelHere = GameObject.Find("Panel(HereTogo)");
         panelHere.SetActive(false);
+        panelCard = GameObject.Find("Panel(CardorCash)");
+        panelCard.SetActive(false);
 
         GameObject.Find("TotalPriceText").GetComponent<Text>().text = "0";
         orderItems.Clear();
@@ -290,6 +293,15 @@ public class Button_Control : MonoBehaviour
         panelMain.SetActive(true);
         panelCoffee.SetActive(true);
         panelCoffeemenu.SetActive(true);
+        panelCard.SetActive(false);
+        panelHere.SetActive(false);
+        panelStart.SetActive(false);
+        panelLattemenu.SetActive(false);
+        panelTeamenu.SetActive(false);
+        panelAdemenu.SetActive(false);
+        panelNonCoffeemenu.SetActive(false);
+        panelFrappemenu.SetActive(false);
+        panelFoodmenu.SetActive(false);
     }
     public void Icetea()
     {
@@ -587,6 +599,7 @@ public class Button_Control : MonoBehaviour
     }
     public void Here()
     {
+        panelCard.SetActive(true);
         panelHere.SetActive(false);
         panelMain.SetActive(false);
         panelStart.SetActive(false);
@@ -599,28 +612,33 @@ public class Button_Control : MonoBehaviour
         panelFrappemenu.SetActive(false);
         panelFoodmenu.SetActive(false);
         panelOption.SetActive(false);
-
+    }
+    public void Togo()
+    {
+        panelCard.SetActive(true);
+        panelHere.SetActive(false);
+        panelMain.SetActive(false);
+        panelStart.SetActive(false);
+        panelCoffee.SetActive(false);
+        panelCoffeemenu.SetActive(false);
+        panelLattemenu.SetActive(false);
+        panelTeamenu.SetActive(false);
+        panelAdemenu.SetActive(false);
+        panelNonCoffeemenu.SetActive(false);
+        panelFrappemenu.SetActive(false);
+        panelFoodmenu.SetActive(false);
+        panelOption.SetActive(false);
+    }
+    public void Gifticon()
+    {
         Application.Quit();
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
-    public void Togo()
+    public void Card()
     {
-        panelHere.SetActive(false);
-        panelMain.SetActive(false);
-        panelStart.SetActive(false);
-        panelCoffee.SetActive(false);
-        panelCoffeemenu.SetActive(false);
-        panelLattemenu.SetActive(false);
-        panelTeamenu.SetActive(false);
-        panelAdemenu.SetActive(false);
-        panelNonCoffeemenu.SetActive(false);
-        panelFrappemenu.SetActive(false);
-        panelFoodmenu.SetActive(false);
-        panelOption.SetActive(false);
-
         Application.Quit();
 
 #if UNITY_EDITOR
