@@ -37,7 +37,7 @@ public class Left_Hand : MonoBehaviour
 
         lineR = GetComponent<LineRenderer>();
 
-        startScreen = GameObject.Find("StartScreen");
+        startScreen = GameObject.Find("StartScreen2");
         selectScreen = GameObject.Find("SelectScreen");
         //selectScreen.SetActive(false); //시작할때 선택화면 꺼두기
         tutorialScreen = GameObject.Find("TutorialScreen");
