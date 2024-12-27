@@ -35,6 +35,8 @@ public class Button_Control : MonoBehaviour
     private int currentMenuPrice = 0;
     private string currentMenuName = "";
     private List<string> currentOptions = new List<string>(); // 추가된 옵션 이름 리스트
+    public Text selectedOptionsText; // 선택한 옵션을 표시할 텍스트
+    public Text totalOptionPriceText;     // 총 옵션 가격을 표시할 텍스트
 
     void Start()
     {
@@ -65,7 +67,7 @@ public class Button_Control : MonoBehaviour
         panelOption = GameObject.Find("Panel(Option)");
         panelOption.SetActive(false);
 
-        GameObject.Find("TotalPriceText").GetComponent<Text>().text = "";
+        GameObject.Find("TotalPriceText").GetComponent<Text>().text = "0";
         orderItems.Clear();
         totalPrice = 0;
     }
@@ -550,10 +552,6 @@ public class Button_Control : MonoBehaviour
         AddOrder(finalMenuName, finalPrice);
         ResetCurrentSelections(); // 현재 선택 초기화
     }
-    public void Resetoption()
-    {
-        Debug.Log("option");
-    }
     void AddOrder(string menuName, int price)
     {
         // 프리팹 생성
@@ -571,7 +569,8 @@ public class Button_Control : MonoBehaviour
         removeButton.onClick.AddListener(() => RemoveOrderButton(newItem)); // 프리팹 오브젝트 전달
 
         // 콜라이더 추가 (VR에서 클릭 가능하게 만듬)
-        removeButton.gameObject.AddComponent<BoxCollider>(); // 버튼에 콜라이더 추가
+        BoxCollider collider = removeButton.gameObject.AddComponent<BoxCollider>();
+        collider.size = new Vector3(30f, 30f, 3f);
 
         // 주문 리스트에 추가
         orderItems.Add(newItem);
@@ -579,17 +578,34 @@ public class Button_Control : MonoBehaviour
         UpdateTotalPrice();
     }
 
-    void AddOption(string optionName, int price)
+    private void AddOption(string optionName, int price)
     {
         if (!currentOptions.Contains(optionName)) // 중복 옵션 방지
         {
             currentOptions.Add(optionName);
             currentOptionPrice += price;
+
+            // 텍스트 UI 업데이트
+            UpdateSelectedOptionsText();
+            UpdateTotalOptionPriceText();
         }
         else
         {
             Debug.Log($"옵션 '{optionName}'은 이미 추가되었습니다.");
         }
+    }
+
+    private void UpdateSelectedOptionsText()
+    {
+        // 옵션 목록을 문자열로 변환하여 텍스트 UI에 표시
+        string optionsSummary = string.Join(", ", currentOptions);
+        selectedOptionsText.text = $"{optionsSummary}";
+    }
+
+    private void UpdateTotalOptionPriceText()
+    {
+        // 총 옵션 가격을 텍스트 UI에 표시
+        totalOptionPriceText.text = $"{currentOptionPrice}";
     }
 
     public void RemoveOrderButton(GameObject orderItem)
@@ -621,10 +637,15 @@ public class Button_Control : MonoBehaviour
         GameObject.Find("TotalPriceText").GetComponent<Text>().text = totalPrice.ToString();
     }
 
-    void ResetOptions()
+    public void ResetOptions()
     {
+        // 옵션 리스트와 총 가격 초기화
         currentOptions.Clear();
         currentOptionPrice = 0;
+
+        // 텍스트 UI 초기화
+        UpdateSelectedOptionsText();
+        UpdateTotalOptionPriceText();
     }
 }
 
