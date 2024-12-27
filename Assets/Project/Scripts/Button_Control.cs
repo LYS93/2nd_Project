@@ -32,6 +32,7 @@ public class Button_Control : MonoBehaviour
     public Transform contentParent; // 프리팹이 생성될 부모 오브젝트 (ScrollView의 Content)
     private List<GameObject> orderItems = new List<GameObject>(); // 생성된 텍스트 UI 저장 리스트
 
+    public List<Text> totalPriceTexts;
     private int totalPrice = 0;
     private int currentOptionPrice = 0;
     private int currentMenuPrice = 0;
@@ -73,7 +74,6 @@ public class Button_Control : MonoBehaviour
         panelCard = GameObject.Find("Panel(CardorCash)");
         panelCard.SetActive(false);
 
-        GameObject.Find("TotalPriceText").GetComponent<Text>().text = "0";
         orderItems.Clear();
         totalPrice = 0;
     }
@@ -149,6 +149,28 @@ public class Button_Control : MonoBehaviour
         panelFoodmenu.SetActive(false);
         panelStart.SetActive(true);
         startSwitch = false;
+
+        // 주문 리스트 비우기
+        orderItems.Clear();
+
+        // 화면에서 주문 항목 삭제 (여기에서 문제 발생 가능성 있음)
+        foreach (Transform child in contentParent)  // contentParent는 주문 항목들이 담긴 부모 객체
+        {
+            Destroy(child.gameObject);  // 부모 아래의 모든 자식 객체 삭제
+        }
+
+        // 가격 초기화
+        totalPrice = 0;
+        currentMenuPrice = 0;
+        currentOptionPrice = 0;
+        currentOptions.Clear();  // 옵션 목록 초기화
+
+        // 옵션 텍스트 초기화
+        selectedOptionsText.text = "";
+        totalOptionPriceText.text = "";
+
+        // 총 가격 UI 업데이트
+        UpdateTotalPrice();
     }
     public void CoffeeMenu()
     {
@@ -263,7 +285,7 @@ public class Button_Control : MonoBehaviour
         panelMain.SetActive(false);
         panelCoffee.SetActive(false);
         panelCoffeemenu.SetActive(false);
-        currentMenuPrice = 390;
+        currentMenuPrice = 3900;
         currentMenuName = "카페모카";
         ResetOptions();
     }
@@ -727,7 +749,10 @@ public class Button_Control : MonoBehaviour
 
     void UpdateTotalPrice()
     {
-        GameObject.Find("TotalPriceText").GetComponent<Text>().text = totalPrice.ToString();
+        foreach (Text text in totalPriceTexts)
+        {
+            text.text = totalPrice.ToString();
+        }
     }
 
     public void ResetOptions()
@@ -739,6 +764,30 @@ public class Button_Control : MonoBehaviour
         // 텍스트 UI 초기화
         UpdateSelectedOptionsText();
         UpdateTotalOptionPriceText();
+    }
+    public void ResetOrders()
+    {
+        // 주문 리스트 비우기
+        orderItems.Clear();
+
+        // 화면에서 주문 항목 삭제 (여기에서 문제 발생 가능성 있음)
+        foreach (Transform child in contentParent)  // contentParent는 주문 항목들이 담긴 부모 객체
+        {
+            Destroy(child.gameObject);  // 부모 아래의 모든 자식 객체 삭제
+        }
+
+        // 가격 초기화
+        totalPrice = 0;
+        currentMenuPrice = 0;
+        currentOptionPrice = 0;
+        currentOptions.Clear();  // 옵션 목록 초기화
+
+        // 옵션 텍스트 초기화
+        selectedOptionsText.text = "";
+        totalOptionPriceText.text = "";
+
+        // 총 가격 UI 업데이트
+        UpdateTotalPrice();
     }
 }
 
