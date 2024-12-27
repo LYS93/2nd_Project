@@ -21,6 +21,7 @@ public class Button_Control : MonoBehaviour
     public GameObject panelFrappemenu;
     public GameObject panelFoodmenu;
     public GameObject panelOption;
+    public GameObject panelHere;
 
     bool startSwitch;
     bool teaselectSwitch;
@@ -66,6 +67,8 @@ public class Button_Control : MonoBehaviour
         panelFoodmenu.SetActive(false);
         panelOption = GameObject.Find("Panel(Option)");
         panelOption.SetActive(false);
+        panelHere = GameObject.Find("Panel(HereTogo)");
+        panelHere.SetActive(false);
 
         GameObject.Find("TotalPriceText").GetComponent<Text>().text = "0";
         orderItems.Clear();
@@ -551,6 +554,78 @@ public class Button_Control : MonoBehaviour
 
         AddOrder(finalMenuName, finalPrice);
         ResetCurrentSelections(); // 현재 선택 초기화
+    }
+    public void Payment()
+    {
+        panelHere.SetActive(true);
+        panelMain.SetActive(false);
+        panelStart.SetActive(false);
+        panelCoffee.SetActive(false);
+        panelCoffeemenu.SetActive(false);
+        panelLattemenu.SetActive(false);
+        panelTeamenu.SetActive(false);
+        panelAdemenu.SetActive(false);
+        panelNonCoffeemenu.SetActive(false);
+        panelFrappemenu.SetActive(false);
+        panelFoodmenu.SetActive(false);
+        panelOption.SetActive(false);
+    }
+    public void Back()
+    {
+        panelHere.SetActive(false);
+        panelMain.SetActive(true);
+        panelStart.SetActive(false);
+        panelCoffee.SetActive(true);
+        panelCoffeemenu.SetActive(true);
+        panelLattemenu.SetActive(false);
+        panelTeamenu.SetActive(false);
+        panelAdemenu.SetActive(false);
+        panelNonCoffeemenu.SetActive(false);
+        panelFrappemenu.SetActive(false);
+        panelFoodmenu.SetActive(false);
+        panelOption.SetActive(false);
+    }
+    public void Here()
+    {
+        panelHere.SetActive(false);
+        panelMain.SetActive(false);
+        panelStart.SetActive(false);
+        panelCoffee.SetActive(false);
+        panelCoffeemenu.SetActive(false);
+        panelLattemenu.SetActive(false);
+        panelTeamenu.SetActive(false);
+        panelAdemenu.SetActive(false);
+        panelNonCoffeemenu.SetActive(false);
+        panelFrappemenu.SetActive(false);
+        panelFoodmenu.SetActive(false);
+        panelOption.SetActive(false);
+
+        Application.Quit();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+    public void Togo()
+    {
+        panelHere.SetActive(false);
+        panelMain.SetActive(false);
+        panelStart.SetActive(false);
+        panelCoffee.SetActive(false);
+        panelCoffeemenu.SetActive(false);
+        panelLattemenu.SetActive(false);
+        panelTeamenu.SetActive(false);
+        panelAdemenu.SetActive(false);
+        panelNonCoffeemenu.SetActive(false);
+        panelFrappemenu.SetActive(false);
+        panelFoodmenu.SetActive(false);
+        panelOption.SetActive(false);
+
+        Application.Quit();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
     void AddOrder(string menuName, int price)
     {
