@@ -23,6 +23,8 @@ public class R_Hand_2 : MonoBehaviour
     //public UnityEvent<bool> changeColor06 = new UnityEvent<bool>();
     //bool hitButton06;
     Coroutine vibeHandle;
+    Coroutine vibeButtons; //버튼클릭시 진동 (내가 넣은 스크립트.)
+
 
     //GameObject startScreen;
     //GameObject selectScreen;
@@ -40,8 +42,9 @@ public class R_Hand_2 : MonoBehaviour
 
     //메서드 사용을 위해 스크립트 참조
     Camera_Move cammove;
-    float TransTime = 1.0f; //카메라 부드럽게 변하기.
-    Coroutine myCoroutine;
+    //float TransTime = 1.0f; //카메라 부드럽게 변하기.
+    //Coroutine myCoroutine;
+    bool ischaracterEnter = false; //발판 이전 키오스크 화면 클릭 막기위한 플래그.
 
     Vector3 KioskDirection = new Vector3(1.86f, 2.3f, -1.22f);//코루틴을 위해 가져옴.
     Vector3 TurnAngles = new Vector3(-1.5f, 1, 0.001f);//코루틴을 위해 가져옴.
@@ -230,6 +233,7 @@ public class R_Hand_2 : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    ischaracterEnter = true;
                     //StartCoroutine(VibeHandle());
                 }
             }
@@ -241,17 +245,19 @@ public class R_Hand_2 : MonoBehaviour
                 //    hitButton01 = true;
                 //    changeColor01.Invoke(hitButton01);
                 //}
-
-                lineR.material.color = Color.red;
-                //lineR.endColor = Color.red;
-
-                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                if (ischaracterEnter == true)
                 {
-                    BoxCol.enabled = false; //추가해야하는지 확인부터
-                    cammove.Camera_moveToKiosk();//카메라 이동.
-                    //myCoroutine = StartCoroutine(cammove.changeToKiosk(KioskDirection, TurnAngles, TransTime));
-                    //myCoroutine = null;
-                }
+                    lineR.material.color = Color.red;
+                    //lineR.endColor = Color.red;
+
+                    if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                    {
+                        BoxCol.enabled = false; //추가해야하는지 확인부터
+                        cammove.Camera_moveToKiosk();//카메라 이동.
+                                                     //myCoroutine = StartCoroutine(cammove.changeToKiosk(KioskDirection, TurnAngles, TransTime));
+                                                     //myCoroutine = null;
+                    }
+                }                
             }
 
             if (hit.collider.gameObject.CompareTag("order")) //키오스크 화면 전환. 광고> 메뉴화면. (내가 넣은 코드.)
@@ -267,7 +273,7 @@ public class R_Hand_2 : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
-                    //StartCoroutine(VibeHandle());
+                    StartCoroutine(VibeButtons());
                 }
             }
 
@@ -285,7 +291,7 @@ public class R_Hand_2 : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
-                    //StartCoroutine(VibeHandle());
+                    StartCoroutine(VibeButtons());
                 }
             }
 
@@ -302,7 +308,7 @@ public class R_Hand_2 : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
-                    //StartCoroutine(VibeHandle());
+                    StartCoroutine(VibeButtons());
                 }
             }
 
@@ -319,7 +325,7 @@ public class R_Hand_2 : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
-                    //StartCoroutine(VibeHandle());
+                    StartCoroutine(VibeButtons());
                 }
             }
 
@@ -336,7 +342,7 @@ public class R_Hand_2 : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
-                    //StartCoroutine(VibeHandle());
+                    StartCoroutine(VibeButtons());
                 }
             }
 
@@ -348,7 +354,7 @@ public class R_Hand_2 : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
-                    //StartCoroutine(VibeHandle());
+                    StartCoroutine(VibeButtons());
                 }
             }
 
@@ -360,9 +366,36 @@ public class R_Hand_2 : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
-                    //StartCoroutine(VibeHandle());
+                    StartCoroutine(VibeButtons());
                 }
             }
+
+            if (hit.collider.gameObject.CompareTag("menuButton") && !hit.collider.gameObject.CompareTag("barPartition")) //메뉴버튼을 눌렀을때.&& 장바구니 창 뒤로 인식이 안되도록 (내가 넣은 코드.)
+            {
+
+                lineR.material.color = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeButtons());
+                }
+
+            }
+
+            if (hit.collider.gameObject.CompareTag("buttonEtc") && !hit.collider.gameObject.CompareTag("confirmPartition")) //기타 버튼을 눌렀을때. ex.+ / - / x 버튼. (내가 넣은 코드.)
+                                                                                                                            //&& 주문내역 확인창 떴을때 인식 안되도록.
+            {
+
+                lineR.material.color = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeButtons());
+                }
+            }
+
         }
         else if (hitButton01 == true)
         {
@@ -423,7 +456,7 @@ public class R_Hand_2 : MonoBehaviour
             {
                 lHand.optionScreen.SetActive(true);
                 lHand.optionSwitch = true;
-                lHand.optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 1;
+                lHand.optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 0.85f;
                 lHand.optionScreen.transform.forward = cameraCenter.transform.forward;
                 //옵션창이 현재 사용자가 바라보는 방향의 앞쪽에 나올수있도록
             }
@@ -438,6 +471,13 @@ public class R_Hand_2 : MonoBehaviour
     {
         OVRInput.SetControllerVibration(0.5f, 0.5f, OVRInput.Controller.RTouch);
         yield return new WaitForSeconds(0.5f);
+        OVRInput.SetControllerVibration(0f, 0f, OVRInput.Controller.RTouch);
+    }
+
+    IEnumerator VibeButtons()
+    {
+        OVRInput.SetControllerVibration(0.1f, 0.5f, OVRInput.Controller.RTouch);
+        yield return new WaitForSeconds(0.1f);
         OVRInput.SetControllerVibration(0f, 0f, OVRInput.Controller.RTouch);
     }
 }

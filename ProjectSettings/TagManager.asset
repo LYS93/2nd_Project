@@ -14,7 +14,6 @@ TagManager:
   - option
   - FootPrint
   - KioskFront
-  - cateButton
   - order
   - cateChicken
   - cateFriedrice
@@ -22,6 +21,10 @@ TagManager:
   - cateNoodle
   - bar
   - goAd
+  - menuButton
+  - buttonEtc
+  - barPartition
+  - confirmPartition
   layers:
   - Default
   - TransparentFX

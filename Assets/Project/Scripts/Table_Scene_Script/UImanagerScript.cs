@@ -78,7 +78,15 @@ public class UImanagerScript : MonoBehaviour
         ad_sc.SetActive(true);
             gotoAd.SetActive(false);
             Chicken_sc.SetActive(false);
+        if (Rice_sc != null)
+        {
             Rice_sc.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("Rice_sc 인스펙터 창에서 assigned가 안됏어요.");
+        }
+        //Rice_sc.SetActive(false);
             Side_sc.SetActive(false);
             Noodle_sc.SetActive(false);
         bar[0].SetActive(false); //닫혀있는 바의 모습
@@ -317,6 +325,8 @@ public class UImanagerScript : MonoBehaviour
     public void ReturnToAd()
     {
         gotoAd.SetActive(false);
+
+        Debug.Log("왜 검은화면뜨지?");
 
         bar[0].SetActive(false); 
         bar[1].SetActive(false); 
