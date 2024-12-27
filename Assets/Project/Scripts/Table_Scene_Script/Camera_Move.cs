@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Camera_Move : MonoBehaviour
 {
-    Camera Player_camera;
+    public OVRCameraRig Player_camera;
+
+    Vector3 startcamPos = new Vector3(-1, 3.5f, -8);
+    Vector3 startcamRot = new Vector3(4.33f, 0f, 0f);
+
     Vector3 MoveDirection = new Vector3(1.21f, 2.58f, -1.74f);
-    Vector3 KioskDirection = new Vector3(1.86f, 2.3f, -1.22f);
+    Vector3 KioskDirection = new Vector3(1.86f, 2.3f, -1.3f); // 초기의 z값: -1.22f
 
     //float TransTime = 1.0f; //카메라 부드럽게 변하기. => 다른스크립트에 넣었다.
     //Coroutine myCoroutine; //카메라 부드럽게 변하기. => 다른스크립트에 넣었다.
@@ -20,7 +24,10 @@ public class Camera_Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player_camera = GetComponent<Camera>();
+        Player_camera = GetComponent<OVRCameraRig>();
+
+        Player_camera.transform.position = startcamPos; //카메라 초기 상태(위치)
+        Player_camera.transform.eulerAngles = startcamRot; //카메라 초기 상태(각도)
 
         Door = GameObject.Find("door");
         //Door.transform.position = Vector3.zero;
@@ -30,7 +37,7 @@ public class Camera_Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (iscameramove == true)
+        if (iscameramove == true) //자동문
         {
             Door.transform.position = new Vector3(3.2f, 0, 0);
 
