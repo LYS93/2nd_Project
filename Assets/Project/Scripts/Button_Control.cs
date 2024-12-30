@@ -1,7 +1,6 @@
 using Oculus.Platform.Models;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -656,6 +655,7 @@ public class Button_Control : MonoBehaviour
         Application.Quit();
 
 #if UNITY_EDITOR
+        // Unity 에디터에서는 플레이 모드 종료
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
@@ -664,6 +664,7 @@ public class Button_Control : MonoBehaviour
         Application.Quit();
 
 #if UNITY_EDITOR
+        // Unity 에디터에서는 플레이 모드 종료
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
