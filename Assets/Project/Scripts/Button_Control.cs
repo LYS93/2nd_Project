@@ -1,6 +1,7 @@
 using Oculus.Platform.Models;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -39,6 +40,15 @@ public class Button_Control : MonoBehaviour
     private List<string> currentOptions = new List<string>(); // 추가된 옵션 이름 리스트
     public Text selectedOptionsText; // 선택한 옵션을 표시할 텍스트
     public Text totalOptionPriceText;     // 총 옵션 가격을 표시할 텍스트
+    private int totalMenuCount = 0; // 메뉴의 총 갯수
+    public Text[] leftTexts; // LeftText를 여러 패널에서 동기화
+    public Text[] rightTexts; // RightText를 여러 패널에서 동기화
+    public Text[] menuCountTexts; // 메뉴 갯수를 표시할 텍스트 배열
+    private List<string> orderNames = new List<string>();
+    private List<int> orderPrices = new List<int>();
+
+    public Text[] leftTextFields;  // 다른 패널에 있는 LeftText 텍스트 배열
+    public Text[] rightTextFields; // 다른 패널에 있는 RightText 텍스트 배열
 
     void Start()
     {
@@ -682,7 +692,7 @@ public class Button_Control : MonoBehaviour
 
         // 삭제 버튼 이벤트 연결
         Button removeButton = newItem.transform.Find("RemoveButton").GetComponent<Button>();
-        removeButton.onClick.AddListener(() => RemoveOrderButton(newItem)); // 프리팹 오브젝트 전달
+        removeButton.onClick.AddListener(() => RemoveOrderButton(newItem));
 
         // 콜라이더 추가 (VR에서 클릭 가능하게 만듬)
         BoxCollider collider = removeButton.gameObject.AddComponent<BoxCollider>();
@@ -691,7 +701,9 @@ public class Button_Control : MonoBehaviour
         // 주문 리스트에 추가
         orderItems.Add(newItem);
         totalPrice += price;
+        totalMenuCount++;  // 메뉴 추가할 때마다 갯수 증가
         UpdateTotalPrice();
+        UpdateMenuCountText(); // 메뉴 갯수 UI 업데이트
     }
 
     private void AddOption(string optionName, int price)
@@ -708,6 +720,14 @@ public class Button_Control : MonoBehaviour
         else
         {
             Debug.Log($"옵션 '{optionName}'은 이미 추가되었습니다.");
+        }
+    }
+    void UpdateMenuCountText()
+    {
+        // 메뉴 갯수를 여러 패널에서 동기화
+        foreach (Text text in menuCountTexts)
+        {
+            text.text = totalMenuCount.ToString();
         }
     }
 
@@ -738,8 +758,29 @@ public class Button_Control : MonoBehaviour
         // UI 오브젝트 삭제
         Destroy(orderItem);
 
-        // 총 가격 UI 갱신
-        UpdateTotalPrice();
+        // 메뉴 갯수 감소
+        totalMenuCount--;
+        UpdateTotalPrice();  // 총 가격 UI 갱신
+        UpdateMenuCountText(); // 메뉴 갯수 UI 갱신
+    }
+    void UpdateMenuUI()
+    {
+        // 모든 패널에 데이터 동기화
+        for (int i = 0; i < orderNames.Count; i++)
+        {
+            if (i < leftTextFields.Length)
+                leftTextFields[i].text = orderNames[i];
+
+            if (i < rightTextFields.Length)
+                rightTextFields[i].text = orderPrices[i].ToString();
+        }
+
+        // 남은 텍스트 필드는 비우기
+        for (int i = orderNames.Count; i < leftTextFields.Length; i++)
+        {
+            leftTextFields[i].text = "";
+            rightTextFields[i].text = "";
+        }
     }
 
     void ResetCurrentSelections()
@@ -771,17 +812,18 @@ public class Button_Control : MonoBehaviour
         // 주문 리스트 비우기
         orderItems.Clear();
 
-        // 화면에서 주문 항목 삭제 (여기에서 문제 발생 가능성 있음)
-        foreach (Transform child in contentParent)  // contentParent는 주문 항목들이 담긴 부모 객체
+        // 화면에서 주문 항목 삭제
+        foreach (Transform child in contentParent)
         {
-            Destroy(child.gameObject);  // 부모 아래의 모든 자식 객체 삭제
+            Destroy(child.gameObject);
         }
 
         // 가격 초기화
         totalPrice = 0;
+        totalMenuCount = 0;  // 메뉴 갯수 초기화
         currentMenuPrice = 0;
         currentOptionPrice = 0;
-        currentOptions.Clear();  // 옵션 목록 초기화
+        currentOptions.Clear();
 
         // 옵션 텍스트 초기화
         selectedOptionsText.text = "";
@@ -789,6 +831,9 @@ public class Button_Control : MonoBehaviour
 
         // 총 가격 UI 업데이트
         UpdateTotalPrice();
+
+        // 메뉴 갯수 UI 업데이트
+        UpdateMenuCountText();
     }
 }
 
