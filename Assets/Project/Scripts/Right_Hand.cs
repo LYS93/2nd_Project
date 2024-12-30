@@ -38,7 +38,7 @@ public class Right_Hand : MonoBehaviour
 
         lineR = GetComponent<LineRenderer>();
 
-        startScreen = GameObject.Find("StartScreen");
+        startScreen = GameObject.Find("StartScreen2");
         selectScreen = GameObject.Find("SelectScreen");
         selectScreen.SetActive(false); //시작할때 선택화면 꺼두기
         tutorialScreen = GameObject.Find("TutorialScreen");
@@ -51,7 +51,7 @@ public class Right_Hand : MonoBehaviour
         ray.origin = transform.position; //오른손을 시작으로 레이가 시작
         ray.direction = transform.forward; //레이의 방향은 앞쪽
         lineR.SetPosition(0, ray.origin); //레이를 눈에 보이도록 시작은 오른손
-        lineR.SetPosition(1, ray.direction * 8); //레이의 길이
+        lineR.SetPosition(1, ray.origin + ray.direction * 8); //레이의 길이
         lineR.material.color = Color.cyan; //레이의 색
 
         if(Physics.Raycast(ray, out hit, 100f)) //레이를 100거리만큼 발사
