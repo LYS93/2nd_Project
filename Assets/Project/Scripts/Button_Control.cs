@@ -198,6 +198,7 @@ public class Button_Control : MonoBehaviour
     {
         panelCoffee.SetActive(true);
         panelTea.SetActive(false);
+        panelTeamenu.SetActive(false);
         panelFood.SetActive(false);
         teaselectSwitch = false;
         foodselectSwitch = false;
@@ -207,6 +208,7 @@ public class Button_Control : MonoBehaviour
         panelCoffee.SetActive(false);
         panelCoffeemenu.SetActive(false);
         panelTea.SetActive(true);
+        panelTeamenu.SetActive(true);
         panelFood.SetActive(false);
         startSwitch = false;
         foodselectSwitch = false;
@@ -329,6 +331,8 @@ public class Button_Control : MonoBehaviour
         panelNonCoffeemenu.SetActive(false);
         panelFrappemenu.SetActive(false);
         panelFoodmenu.SetActive(false);
+        panelCharge.SetActive(false);
+        card.SetActive(false);
     }
     public void Icetea()
     {
