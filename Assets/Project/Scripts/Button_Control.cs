@@ -29,26 +29,31 @@ public class Button_Control : MonoBehaviour
     bool foodselectSwitch;
 
     public GameObject textPrefab; // 텍스트와 버튼이 포함된 프리팹
-    public Transform contentParent; // 프리팹이 생성될 부모 오브젝트 (ScrollView의 Content)
-    private List<GameObject> orderItems = new List<GameObject>(); // 생성된 텍스트 UI 저장 리스트
-
-    public List<Text> totalPriceTexts;
-    private int totalPrice = 0;
-    private int currentOptionPrice = 0;
-    private int currentMenuPrice = 0;
-    private string currentMenuName = "";
-    private List<string> currentOptions = new List<string>(); // 추가된 옵션 이름 리스트
-    public Text selectedOptionsText; // 선택한 옵션을 표시할 텍스트
-    public Text totalOptionPriceText;     // 총 옵션 가격을 표시할 텍스트
-    private int totalMenuCount = 0; // 메뉴의 총 갯수
-    public Text[] leftTexts; // LeftText를 여러 패널에서 동기화
-    public Text[] rightTexts; // RightText를 여러 패널에서 동기화
     public Text[] menuCountTexts; // 메뉴 갯수를 표시할 텍스트 배열
-    private List<string> orderNames = new List<string>();
-    private List<int> orderPrices = new List<int>();
-
-    public Text[] leftTextFields;  // 다른 패널에 있는 LeftText 텍스트 배열
+    public Text[] leftTextFields; // 다른 패널에 있는 LeftText 텍스트 배열
     public Text[] rightTextFields; // 다른 패널에 있는 RightText 텍스트 배열
+    public List<Text> totalPriceTexts; // 총 가격을 표시할 텍스트 배열
+    public Text selectedOptionsText; // 선택한 옵션을 표시할 텍스트
+    public Text totalOptionPriceText; // 총 옵션 가격을 표시할 텍스트
+
+    private List<GameObject> orderItems = new List<GameObject>(); // 생성된 텍스트 UI 저장 리스트
+    private List<Text> leftTextList = new List<Text>(); // 동적으로 생성된 LeftText 리스트
+    private List<Text> rightTextList = new List<Text>(); // 동적으로 생성된 RightText 리스트
+    private List<string> currentOptions = new List<string>(); // 추가된 옵션 이름 리스트
+    private int totalPrice = 0; // 총 가격
+    private int currentOptionPrice = 0; // 현재 선택된 옵션의 총 가격
+    private int totalMenuCount = 0; // 메뉴의 총 갯수
+
+    public string currentMenuName; // 현재 선택된 메뉴 이름
+    public int currentMenuPrice; // 현재 선택된 메뉴 가격
+
+    public Transform contentParentMain;  // 메인 패널의 Content Parent
+    public Transform contentParentOther; // 다른 패널의 Content Parent
+
+    // 동일한 contentParent를 두 패널에서 공유
+    private Transform sharedContentParent;
+    // 두 패널의 항목을 매핑하여 동기화
+    private Dictionary<GameObject, GameObject> panelMapping = new Dictionary<GameObject, GameObject>();
 
     void Start()
     {
@@ -85,9 +90,12 @@ public class Button_Control : MonoBehaviour
 
         orderItems.Clear();
         totalPrice = 0;
+
+        // 동일한 Content를 두 패널에서 사용할 수 있도록 설정
+        sharedContentParent = contentParentMain;  // 기본적으로 메인 패널의 Content를 설정
     }
 
-    
+
     void Update()
     {
         if (panelMain.activeSelf == true && startSwitch == false && panelCoffee.activeSelf == true)
@@ -101,7 +109,7 @@ public class Button_Control : MonoBehaviour
             panelFoodmenu.SetActive(false);
             startSwitch = true;
         }
-        if(panelMain.activeSelf == true && teaselectSwitch == false && panelTea.activeSelf == true)
+        if (panelMain.activeSelf == true && teaselectSwitch == false && panelTea.activeSelf == true)
         {
             panelCoffeemenu.SetActive(false);
             panelLattemenu.SetActive(false);
@@ -122,7 +130,7 @@ public class Button_Control : MonoBehaviour
             panelFrappemenu.SetActive(false);
             panelFoodmenu.SetActive(true);
             foodselectSwitch = true;
-        }        
+        }
     }
     public void Restart() //시작화면으로 돌아가는 버튼
     {
@@ -161,28 +169,30 @@ public class Button_Control : MonoBehaviour
 
         // 주문 리스트 비우기
         orderItems.Clear();
+        leftTextList.Clear();
+        rightTextList.Clear();
 
-        // 화면에서 주문 항목 삭제 (여기에서 문제 발생 가능성 있음)
-        foreach (Transform child in contentParent)  // contentParent는 주문 항목들이 담긴 부모 객체
+        // 화면에서 주문 항목 삭제
+        foreach (Transform child in contentParentMain)
         {
-            Destroy(child.gameObject);  // 부모 아래의 모든 자식 객체 삭제
+            Destroy(child.gameObject);
         }
 
-        // 가격 초기화
+        foreach (Transform child in contentParentOther)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // 데이터 초기화
         totalPrice = 0;
-        currentMenuPrice = 0;
+        totalMenuCount = 0;
         currentOptionPrice = 0;
-        currentOptions.Clear();  // 옵션 목록 초기화
+        currentOptions.Clear();
 
-        // 옵션 텍스트 초기화
-        selectedOptionsText.text = "";
-        totalOptionPriceText.text = "";
-
-        // 총 가격 UI 업데이트
+        // UI 초기화
         UpdateTotalPrice();
-
-        totalMenuCount = 0; // 메뉴 갯수 초기화
-        UpdateMenuCountText(); // 메뉴 갯수 UI 갱신
+        UpdateMenuCountText();
+        UpdateMenuUI();
     }
     public void CoffeeMenu()
     {
@@ -195,6 +205,7 @@ public class Button_Control : MonoBehaviour
     public void TeaMenu()
     {
         panelCoffee.SetActive(false);
+        panelCoffeemenu.SetActive(false);
         panelTea.SetActive(true);
         panelFood.SetActive(false);
         startSwitch = false;
@@ -203,6 +214,7 @@ public class Button_Control : MonoBehaviour
     public void FoodMenu()
     {
         panelCoffee.SetActive(false);
+        panelCoffeemenu.SetActive(false);
         panelTea.SetActive(false);
         panelFood.SetActive(true);
         panelFoodmenu.SetActive(true);
@@ -306,6 +318,8 @@ public class Button_Control : MonoBehaviour
         panelMain.SetActive(true);
         panelCoffee.SetActive(true);
         panelCoffeemenu.SetActive(true);
+        panelTea.SetActive(false);
+        panelFood.SetActive(false);
         panelCard.SetActive(false);
         panelHere.SetActive(false);
         panelStart.SetActive(false);
@@ -506,6 +520,8 @@ public class Button_Control : MonoBehaviour
         panelStart.SetActive(false);
         panelCoffee.SetActive(true);
         panelCoffeemenu.SetActive(true);
+        panelTea.SetActive(false);
+        panelFood.SetActive(false);
         panelLattemenu.SetActive(false);
         panelTeamenu.SetActive(false);
         panelAdemenu.SetActive(false);
@@ -606,32 +622,60 @@ public class Button_Control : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
+    //000
     void AddOrder(string menuName, int price)
     {
-        // 프리팹 생성
-        GameObject newItem = Instantiate(textPrefab, contentParent);
+        // 현재 메뉴 정보 업데이트
+        currentMenuName = menuName;
+        currentMenuPrice = price;
+
+        // 프리팹 생성 (공유된 contentParent에 생성)
+        GameObject newItemMainPanel = Instantiate(textPrefab, contentParentMain);
+        GameObject newItemOtherPanel = Instantiate(textPrefab, contentParentOther);
 
         // 텍스트 UI 설정
-        Text leftText = newItem.transform.Find("LeftText").GetComponent<Text>();
-        Text rightText = newItem.transform.Find("RightText").GetComponent<Text>();
+        Text leftTextMain = newItemMainPanel.transform.Find("LeftText").GetComponent<Text>();
+        Text rightTextMain = newItemMainPanel.transform.Find("RightText").GetComponent<Text>();
 
-        leftText.text = menuName;
-        rightText.text = price.ToString();
+        Text leftTextOther = newItemOtherPanel.transform.Find("LeftText").GetComponent<Text>();
+        Text rightTextOther = newItemOtherPanel.transform.Find("RightText").GetComponent<Text>();
 
-        // 삭제 버튼 이벤트 연결
-        Button removeButton = newItem.transform.Find("RemoveButton").GetComponent<Button>();
-        removeButton.onClick.AddListener(() => RemoveOrderButton(newItem));
+        leftTextMain.text = menuName;
+        rightTextMain.text = price.ToString();
+
+        leftTextOther.text = menuName;
+        rightTextOther.text = price.ToString();
+
+        // 위치 및 크기 변경 (두 번째 패널에서만)
+        RectTransform rectTransformOther = newItemOtherPanel.GetComponent<RectTransform>();
+        rectTransformOther.anchoredPosition = new Vector2(100f, 0f); // 예시로 X = 100, Y = 0 위치
+        rectTransformOther.sizeDelta = new Vector2(300f, 50f); // 크기 조정: 300x50
+
+        // 리스트에 추가
+        orderItems.Add(newItemMainPanel);
+        orderItems.Add(newItemOtherPanel);
+
+        // 삭제 버튼 이벤트 연결 (동기화)
+        Button removeButtonMain = newItemMainPanel.transform.Find("RemoveButton").GetComponent<Button>();
+        removeButtonMain.onClick.AddListener(() => RemoveOrder(newItemMainPanel, newItemOtherPanel, price));
+
+        Button removeButtonOther = newItemOtherPanel.transform.Find("RemoveButton").GetComponent<Button>();
+        removeButtonOther.onClick.AddListener(() => RemoveOrder(newItemOtherPanel, newItemMainPanel, price));
 
         // 콜라이더 추가 (VR에서 클릭 가능하게 만듬)
-        BoxCollider collider = removeButton.gameObject.AddComponent<BoxCollider>();
-        collider.size = new Vector3(30f, 30f, 3f);
+        BoxCollider colliderMain = removeButtonMain.gameObject.AddComponent<BoxCollider>();
+        colliderMain.size = new Vector3(30f, 30f, 3f);
 
-        // 주문 리스트에 추가
-        orderItems.Add(newItem);
+        BoxCollider colliderOther = removeButtonOther.gameObject.AddComponent<BoxCollider>();
+        colliderOther.size = new Vector3(30f, 30f, 3f);
+
+        // 가격 및 메뉴 개수 업데이트
         totalPrice += price;
-        totalMenuCount++;  // 메뉴 추가할 때마다 갯수 증가
+        totalMenuCount++;
+
+        // UI 갱신
         UpdateTotalPrice();
-        UpdateMenuCountText(); // 메뉴 갯수 UI 업데이트
+        UpdateMenuCountText();
     }
 
     private void AddOption(string optionName, int price)
@@ -672,42 +716,62 @@ public class Button_Control : MonoBehaviour
         totalOptionPriceText.text = $"{currentOptionPrice}";
     }
 
-    public void RemoveOrderButton(GameObject orderItem)
+    void RemoveOrder(GameObject orderItem, GameObject syncedOrderItem, int price)
     {
-        // 삭제할 항목의 가격 가져오기
-        int price = int.Parse(orderItem.transform.Find("RightText").GetComponent<Text>().text);
-
-        // 총 가격에서 차감
-        totalPrice -= price;
-
-        // 주문 항목 리스트에서 제거
+        // 리스트에서 제거
         orderItems.Remove(orderItem);
+        orderItems.Remove(syncedOrderItem);
 
         // UI 오브젝트 삭제
         Destroy(orderItem);
+        Destroy(syncedOrderItem);
 
-        // 메뉴 갯수 감소
+        // 가격 및 메뉴 개수 업데이트
+        totalPrice -= price;
         totalMenuCount--;
-        UpdateTotalPrice();  // 총 가격 UI 갱신
-        UpdateMenuCountText(); // 메뉴 갯수 UI 갱신
-    }
-    void UpdateMenuUI()
-    {
-        // 모든 패널에 데이터 동기화
-        for (int i = 0; i < orderNames.Count; i++)
-        {
-            if (i < leftTextFields.Length)
-                leftTextFields[i].text = orderNames[i];
 
-            if (i < rightTextFields.Length)
-                rightTextFields[i].text = orderPrices[i].ToString();
+        // UI 갱신
+        UpdateTotalPrice();
+        UpdateMenuCountText();
+    }
+    private void UpdateMenuUI()
+    {
+        // 각 패널의 항목을 모두 제거한 후 동기화
+        foreach (Transform child in contentParentMain)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in contentParentOther)
+        {
+            Destroy(child.gameObject);
         }
 
-        // 남은 텍스트 필드는 비우기
-        for (int i = orderNames.Count; i < leftTextFields.Length; i++)
+        // orderItems 리스트를 기반으로 동기화된 항목 생성
+        for (int i = 0; i < orderItems.Count; i += 2)
         {
-            leftTextFields[i].text = "";
-            rightTextFields[i].text = "";
+            GameObject orderItemMainPanel = orderItems[i];  // 첫 번째 패널의 항목
+            GameObject orderItemOtherPanel = orderItems[i + 1];  // 두 번째 패널의 항목
+
+            // 첫 번째 패널 항목을 생성하고 텍스트 설정
+            GameObject newItemMainPanel = Instantiate(orderItemMainPanel, contentParentMain);
+            Text leftTextMain = newItemMainPanel.transform.Find("LeftText").GetComponent<Text>();
+            Text rightTextMain = newItemMainPanel.transform.Find("RightText").GetComponent<Text>();
+            leftTextMain.text = orderItemMainPanel.transform.Find("LeftText").GetComponent<Text>().text;
+            rightTextMain.text = orderItemMainPanel.transform.Find("RightText").GetComponent<Text>().text;
+
+            // 두 번째 패널 항목을 생성하고 텍스트 설정
+            GameObject newItemOtherPanel = Instantiate(orderItemOtherPanel, contentParentOther);
+            Text leftTextOther = newItemOtherPanel.transform.Find("LeftText").GetComponent<Text>();
+            Text rightTextOther = newItemOtherPanel.transform.Find("RightText").GetComponent<Text>();
+            leftTextOther.text = orderItemOtherPanel.transform.Find("LeftText").GetComponent<Text>().text;
+            rightTextOther.text = orderItemOtherPanel.transform.Find("RightText").GetComponent<Text>().text;
+
+            // 삭제 버튼 다시 연결
+            Button removeButtonMain = newItemMainPanel.transform.Find("RemoveButton").GetComponent<Button>();
+            removeButtonMain.onClick.AddListener(() => RemoveOrder(newItemMainPanel, newItemOtherPanel, int.Parse(rightTextMain.text)));
+
+            Button removeButtonOther = newItemOtherPanel.transform.Find("RemoveButton").GetComponent<Button>();
+            removeButtonOther.onClick.AddListener(() => RemoveOrder(newItemOtherPanel, newItemMainPanel, int.Parse(rightTextOther.text)));
         }
     }
 
@@ -739,29 +803,30 @@ public class Button_Control : MonoBehaviour
     {
         // 주문 리스트 비우기
         orderItems.Clear();
+        leftTextList.Clear();
+        rightTextList.Clear();
 
         // 화면에서 주문 항목 삭제
-        foreach (Transform child in contentParent)
+        foreach (Transform child in contentParentMain)
         {
             Destroy(child.gameObject);
         }
 
-        // 가격 초기화
+        foreach (Transform child in contentParentOther)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // 데이터 초기화
         totalPrice = 0;
-        totalMenuCount = 0;  // 메뉴 갯수 초기화
-        currentMenuPrice = 0;
+        totalMenuCount = 0;
         currentOptionPrice = 0;
         currentOptions.Clear();
 
-        // 옵션 텍스트 초기화
-        selectedOptionsText.text = "";
-        totalOptionPriceText.text = "";
-
-        // 총 가격 UI 업데이트
+        // UI 초기화
         UpdateTotalPrice();
-
-        // 메뉴 갯수 UI 업데이트
         UpdateMenuCountText();
+        UpdateMenuUI();
     }
     void OptionOpen()
     {
