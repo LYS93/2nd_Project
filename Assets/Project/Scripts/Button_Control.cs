@@ -564,6 +564,8 @@ public class Button_Control : MonoBehaviour
         panelStart.SetActive(false);
         panelCoffee.SetActive(true);
         panelCoffeemenu.SetActive(true);
+        panelTea.SetActive(false);
+        panelFood.SetActive(false);
         panelLattemenu.SetActive(false);
         panelTeamenu.SetActive(false);
         panelAdemenu.SetActive(false);
