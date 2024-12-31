@@ -180,6 +180,9 @@ public class Button_Control : MonoBehaviour
 
         // 총 가격 UI 업데이트
         UpdateTotalPrice();
+
+        totalMenuCount = 0; // 메뉴 갯수 초기화
+        UpdateMenuCountText(); // 메뉴 갯수 UI 갱신
     }
     public void CoffeeMenu()
     {
