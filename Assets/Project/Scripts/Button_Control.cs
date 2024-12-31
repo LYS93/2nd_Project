@@ -250,70 +250,49 @@ public class Button_Control : MonoBehaviour
     }
     public void Americano()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelCoffee.SetActive(false);
-        panelCoffeemenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 2000;
         currentMenuName = "아메리카노";
         ResetOptions();
     }
     public void Coldbrew()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelCoffee.SetActive(false);
-        panelCoffeemenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3500;
         currentMenuName = "콜드브루";
         ResetOptions();
     }
     public void Espresso()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelCoffee.SetActive(false);
-        panelCoffeemenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 1500;
         currentMenuName = "에스프레소";
         ResetOptions();
     }
     public void Caffelatte()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelCoffee.SetActive(false);
-        panelCoffeemenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 2900;
         currentMenuName = "카페라떼";
         ResetOptions();
     }
     public void Cafemocha()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelCoffee.SetActive(false);
-        panelCoffeemenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3900;
         currentMenuName = "카페모카";
         ResetOptions();
     }
     public void Cappuccino()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelCoffee.SetActive(false);
-        panelCoffeemenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 2900;
         currentMenuName = "카푸치노";
         ResetOptions();
     }
     public void Caramelmacchiato()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelCoffee.SetActive(false);
-        panelCoffeemenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3700;
         currentMenuName = "카라멜마끼아또";
         ResetOptions();
@@ -336,180 +315,126 @@ public class Button_Control : MonoBehaviour
     }
     public void Icetea()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3000;
         currentMenuName = "아이스티";
         ResetOptions();
     }
     public void Chamomile()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 2500;
         currentMenuName = "캐모마일";
         ResetOptions();
     }
     public void Peppermint()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 2500;
         currentMenuName = "페퍼민트";
         ResetOptions();
     }
     public void Citron()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3300;
         currentMenuName = "유자";
         ResetOptions();
     }
     public void Grapefruit()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3500;
         currentMenuName = "자몽에이드";
         ResetOptions();
     }
     public void Whitegrape()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3500;
         currentMenuName = "청포도에이드";
         ResetOptions();
     }
     public void Lemon()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3500;
         currentMenuName = "레몬에이드";
         ResetOptions();
     }
     public void Chocolatte()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3900;
         currentMenuName = "초코라떼";
         ResetOptions();
     }
     public void Strawberrylatte()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3700;
         currentMenuName = "딸기라떼";
         ResetOptions();
     }
     public void Grainlatte()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3000;
         currentMenuName = "곡물라떼";
         ResetOptions();
     }
     public void Greentealatte()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3500;
         currentMenuName = "녹차라떼";
         ResetOptions();
     }
     public void Sweetpotatolatte()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3500;
         currentMenuName = "고구마라떼";
         ResetOptions();
     }
     public void Strawberrysmoothie()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3900;
         currentMenuName = "딸기스무디";
         ResetOptions();
     }
     public void Blueberrysmoothie()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3900;
         currentMenuName = "블루베리스무디";
         ResetOptions();
     }
     public void Planesmoothie()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3900;
         currentMenuName = "플레인스무디";
         ResetOptions();
     }
     public void Mangosmoothie()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3900;
         currentMenuName = "망고스무디";
         ResetOptions();
     }
     public void Cookiefrappe()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3900;
         currentMenuName = "쿠키프라페";
         ResetOptions();
     }
     public void Chocofrappe()
     {
-        panelOption.SetActive(true);
-        panelMain.SetActive(false);
-        panelTea.SetActive(false);
-        panelTeamenu.SetActive(false);
+        OptionOpen();
         currentMenuPrice = 3900;
         currentMenuName = "초코프라페";
         ResetOptions();
@@ -834,6 +759,22 @@ public class Button_Control : MonoBehaviour
 
         // 메뉴 갯수 UI 업데이트
         UpdateMenuCountText();
+    }
+    void OptionOpen()
+    {
+        panelOption.SetActive(true);
+        panelMain.SetActive(false);
+        panelCoffee.SetActive(false);
+        panelCoffeemenu.SetActive(false);
+        panelCard.SetActive(false);
+        panelHere.SetActive(false);
+        panelStart.SetActive(false);
+        panelLattemenu.SetActive(false);
+        panelTeamenu.SetActive(false);
+        panelAdemenu.SetActive(false);
+        panelNonCoffeemenu.SetActive(false);
+        panelFrappemenu.SetActive(false);
+        panelFoodmenu.SetActive(false);
     }
 }
 
