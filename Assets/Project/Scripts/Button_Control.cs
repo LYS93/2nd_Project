@@ -48,12 +48,7 @@ public class Button_Control : MonoBehaviour
     public int currentMenuPrice; // 현재 선택된 메뉴 가격
 
     public Transform contentParentMain;  // 메인 패널의 Content Parent
-    public Transform contentParentOther; // 다른 패널의 Content Parent
-
-    // 동일한 contentParent를 두 패널에서 공유
-    private Transform sharedContentParent;
-    // 두 패널의 항목을 매핑하여 동기화
-    private Dictionary<GameObject, GameObject> panelMapping = new Dictionary<GameObject, GameObject>();
+    public Transform contentParentOther; // 다른 패널의 Content Parent    
 
     void Start()
     {
@@ -90,9 +85,6 @@ public class Button_Control : MonoBehaviour
 
         orderItems.Clear();
         totalPrice = 0;
-
-        // 동일한 Content를 두 패널에서 사용할 수 있도록 설정
-        sharedContentParent = contentParentMain;  // 기본적으로 메인 패널의 Content를 설정
     }
 
 
