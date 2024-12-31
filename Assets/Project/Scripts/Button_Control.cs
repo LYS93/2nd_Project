@@ -23,6 +23,7 @@ public class Button_Control : MonoBehaviour
     public GameObject panelOption;
     public GameObject panelHere;
     public GameObject panelCard;
+    public GameObject panelCharge;
 
     bool startSwitch;
     bool teaselectSwitch;
@@ -48,7 +49,9 @@ public class Button_Control : MonoBehaviour
     public int currentMenuPrice; // 현재 선택된 메뉴 가격
 
     public Transform contentParentMain;  // 메인 패널의 Content Parent
-    public Transform contentParentOther; // 다른 패널의 Content Parent    
+    public Transform contentParentOther; // 다른 패널의 Content Parent
+
+    public GameObject card;
 
     void Start()
     {
@@ -82,9 +85,14 @@ public class Button_Control : MonoBehaviour
         panelHere.SetActive(false);
         panelCard = GameObject.Find("Panel(CardorCash)");
         panelCard.SetActive(false);
+        panelCharge = GameObject.Find("Panel(Charge)");
+        panelCharge.SetActive(false);
 
         orderItems.Clear();
         totalPrice = 0;
+
+        card = GameObject.Find("Card");
+        card.SetActive(false);
     }
 
 
@@ -600,21 +608,42 @@ public class Button_Control : MonoBehaviour
     }
     public void Gifticon()
     {
-        Application.Quit();
-
-#if UNITY_EDITOR
-        // Unity 에디터에서는 플레이 모드 종료
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        panelCard.SetActive(false);
+        panelHere.SetActive(false);
+        panelMain.SetActive(false);
+        panelStart.SetActive(false);
+        panelCoffee.SetActive(false);
+        panelCoffeemenu.SetActive(false);
+        panelLattemenu.SetActive(false);
+        panelTeamenu.SetActive(false);
+        panelAdemenu.SetActive(false);
+        panelNonCoffeemenu.SetActive(false);
+        panelFrappemenu.SetActive(false);
+        panelFoodmenu.SetActive(false);
+        panelOption.SetActive(false);
+        panelCharge.SetActive(true);
     }
     public void Card()
     {
-        Application.Quit();
-
-#if UNITY_EDITOR
-        // Unity 에디터에서는 플레이 모드 종료
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        panelCard.SetActive(false);
+        panelHere.SetActive(false);
+        panelMain.SetActive(false);
+        panelStart.SetActive(false);
+        panelCoffee.SetActive(false);
+        panelCoffeemenu.SetActive(false);
+        panelLattemenu.SetActive(false);
+        panelTeamenu.SetActive(false);
+        panelAdemenu.SetActive(false);
+        panelNonCoffeemenu.SetActive(false);
+        panelFrappemenu.SetActive(false);
+        panelFoodmenu.SetActive(false);
+        panelOption.SetActive(false);
+        panelCharge.SetActive(true);
+        card.SetActive(true);
+    }
+    public void Cardcharge()
+    {
+        SceneManager.LoadScene("ENDScene");
     }
     //000
     void AddOrder(string menuName, int price)
