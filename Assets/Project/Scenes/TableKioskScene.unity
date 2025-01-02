@@ -5640,7 +5640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227121583}
   m_Layer: 0
-  m_Name: table (2)
+  m_Name: order_table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8077,7 +8077,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC608"
+  m_Text: "\uACB0\uC81C\uD558\uAE30"
 --- !u!222 &308826802
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13834,7 +13834,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD14C\uC774\uBE14\uBC88\uD638 110\uBC88 \uC900\uBE44\uC644\uB8CC!"
+  m_Text: "\uD14C\uC774\uBE14\uBC88\uD638 3\uBC88 \uC900\uBE44\uC644\uB8CC!"
 --- !u!222 &589071489
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -37844,7 +37844,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC544\uB2C8\uC694"
+  m_Text: "\uCDE8\uC18C"
 --- !u!222 &1460060382
 CanvasRenderer:
   m_ObjectHideFlags: 0
