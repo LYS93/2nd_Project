@@ -1,3 +1,4 @@
+using Meta.WitAi.Windows;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,7 +36,7 @@ public class L_Hand_2 : MonoBehaviour
     Camera_Move cammove;
 
     public bool optionSwitch; //옵션창 열림,닫힘을 확인하기위해
-    public bool camSwitch; //옵션창 열었을때 카메라 이동을 확인하기 위해
+    //public bool camSwitch; //옵션창 열었을때 카메라 이동을 확인하기 위해 -> 카메라 이동 빼달라는 의견 반영.
 
     bool ischaracterEnter = false; //발판 이전 키오스크 화면 클릭 막기위한 플래그.
 
@@ -46,6 +47,8 @@ public class L_Hand_2 : MonoBehaviour
 
     //스크립트 참조
     PanelmanagerScript panelManager;
+
+    public GameObject KioWindow;// 키오스크 화면 껐다 켰다.
 
     // Start is called before the first frame update
     void Start()
@@ -389,6 +392,27 @@ public class L_Hand_2 : MonoBehaviour
                     StartCoroutine(VibeButtons());
                 }
             }
+
+            if (hit.collider.gameObject.CompareTag("card")) //카드를 움직여서 이동하기 위함. (내가 넣은 코드.)
+            {
+
+                lineR.material.color = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+                {
+                    hit.collider.gameObject.transform.position = Lhand.transform.position + ray.direction * 0.5f;
+                    hit.collider.gameObject.transform.parent = Lhand.transform;
+                    lineR.SetPosition(1, hit.point);
+                    hit.collider.gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
+                }
+                if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+                {
+                    GameObject location = GameObject.Find(hit.collider.gameObject.name + "_");
+                    hit.collider.gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
+                    hit.collider.gameObject.transform.parent = location.transform;
+                    hit.collider.gameObject.transform.localPosition = new Vector3(2.645f, 2.4943f, -0.6345f);
+                }
+            }
         }
         else if (hitButton01 == true)
         {
@@ -439,11 +463,13 @@ public class L_Hand_2 : MonoBehaviour
         {
             if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch))
             {
-                if (camSwitch == true)
-                {
-                    cammove.Player_camera.transform.position += Vector3.forward * 0.4f;// 카메라를 뒤쪽으로 물러나서 옵션창이 보이게끔. (내가 넣은 코드)
-                    camSwitch = false;
-                }
+                //if (camSwitch == true)
+                //{
+                //    cammove.Player_camera.transform.position += Vector3.forward * 0.4f;// 카메라를 뒤쪽으로 물러나서 옵션창이 보이게끔. (내가 넣은 코드)
+                //    camSwitch = false;
+                //}
+                KioWindow.SetActive(true);
+
                 optionScreen.SetActive(false);
                 optionSwitch = false;
             }
@@ -452,11 +478,13 @@ public class L_Hand_2 : MonoBehaviour
         {
             if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch))
             {
-                if (camSwitch == false)
-                {
-                    cammove.Player_camera.transform.position += Vector3.forward * -0.4f;// 카메라를 뒤쪽으로 물러나서 옵션창이 보이게끔. (내가 넣은 코드)
-                    camSwitch = true;
-                }
+                //if (camSwitch == false)
+                //{
+                //    cammove.Player_camera.transform.position += Vector3.forward * -0.4f;// 카메라를 뒤쪽으로 물러나서 옵션창이 보이게끔. (내가 넣은 코드)
+                //    camSwitch = true;
+                //}
+                KioWindow.SetActive(false);
+
                 optionScreen.SetActive(true);
                 optionSwitch = true;
                 optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 1;

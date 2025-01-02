@@ -21,6 +21,8 @@ public class Camera_Move : MonoBehaviour
     public bool iscameramove = false; // 자동문
     bool iscameramoved = false; // 키오스크
 
+    public ParticleSystem footParticle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,8 @@ public class Camera_Move : MonoBehaviour
         Door = GameObject.Find("door");
         //Door.transform.position = Vector3.zero;
         //Door.transform.position = new Vector3(3.2f, 0, 0);
+
+        footParticle.Play();
     }
 
     // Update is called once per frame
@@ -54,12 +58,14 @@ public class Camera_Move : MonoBehaviour
         
     }
 
-    public void Camera_move()
+    public void Camera_move() // 발판을 눌러 매장 안으로 들어가는 메서드
     {
         transform.position = MoveDirection;
         transform.eulerAngles = new Vector3(0, 90, 0);
 
         iscameramove = true;
+
+        footParticle.Stop();
 
 
     }

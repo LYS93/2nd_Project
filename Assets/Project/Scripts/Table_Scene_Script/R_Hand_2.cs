@@ -1,3 +1,4 @@
+using Meta.WitAi.Windows;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,6 +56,9 @@ public class R_Hand_2 : MonoBehaviour
     //스크립트 참조
     PanelmanagerScript panelManager;
 
+    public GameObject KioWindow;// 키오스크 화면 껐다 켰다.
+    BoxCollider KioskCol; // 옵션창 띄울때 키오스크의 콜라이더에 옵션창이 막히지 않도록 껐다켰다. 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -95,6 +99,8 @@ public class R_Hand_2 : MonoBehaviour
         BoxCol = GameObject.Find("KioskCube").GetComponent<BoxCollider>();
 
         panelManager = GameObject.Find("PanelManager").GetComponent<PanelmanagerScript>();
+
+        KioskCol = GameObject.Find("TKiosk").GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -404,6 +410,29 @@ public class R_Hand_2 : MonoBehaviour
                 }
             }
 
+
+            if (hit.collider.gameObject.CompareTag("card")) //카드를 움직여서 이동하기 위함. (내가 넣은 코드.)
+            {
+
+                lineR.material.color = Color.red;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    hit.collider.gameObject.transform.position = Rhand.transform.position + ray.direction * 0.5f;
+                    hit.collider.gameObject.transform.parent = Rhand.transform;
+                    lineR.SetPosition(1, hit.point);
+                    hit.collider.gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
+                }
+                if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                {
+                    GameObject location = GameObject.Find(hit.collider.gameObject.name + "_");
+                    hit.collider.gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
+                    hit.collider.gameObject.transform.parent = location.transform;
+                    hit.collider.gameObject.transform.localPosition = new Vector3(2.645f, 2.4943f, -0.6345f);
+                }
+            }
+
+
         }
         else if (hitButton01 == true)
         {
@@ -454,11 +483,14 @@ public class R_Hand_2 : MonoBehaviour
         {
             if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
             {
-                if (lHand.camSwitch == true)
-                {
-                    cammove.Player_camera.transform.position += Vector3.forward * 0.4f;// 카메라를 뒤쪽으로 물러나서 옵션창이 보이게끔. (내가 넣은 코드)
-                    lHand.camSwitch = false;
-                }
+                //if (lHand.camSwitch == true)
+                //{
+                //    cammove.Player_camera.transform.position += Vector3.forward * 0.4f;// 카메라를 뒤쪽으로 물러나서 옵션창이 보이게끔. (내가 넣은 코드)
+                //    lHand.camSwitch = false;
+                //}
+                KioWindow.SetActive(true);
+                KioskCol.enabled = true;
+
                 lHand.optionScreen.SetActive(false);
                 lHand.optionSwitch = false;
             }
@@ -467,11 +499,14 @@ public class R_Hand_2 : MonoBehaviour
         {
             if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
             {
-                if (lHand.camSwitch == false)
-                {
-                    cammove.Player_camera.transform.position += Vector3.forward * -0.4f;// 카메라를 뒤쪽으로 물러나서 옵션창이 보이게끔. (내가 넣은 코드)
-                    lHand.camSwitch = true;
-                }
+                //if (lHand.camSwitch == false)
+                //{
+                //    cammove.Player_camera.transform.position += Vector3.forward * -0.4f;// 카메라를 뒤쪽으로 물러나서 옵션창이 보이게끔. (내가 넣은 코드)
+                //    lHand.camSwitch = true;
+                //}
+                KioWindow.SetActive(false);
+                KioskCol.enabled = false;
+
                 lHand.optionScreen.SetActive(true);
                 lHand.optionSwitch = true;
                 lHand.optionScreen.transform.position = cameraCenter.transform.position + cameraCenter.transform.forward * 0.85f;
