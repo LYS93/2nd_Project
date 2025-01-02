@@ -8,9 +8,13 @@ public class CardInsert : MonoBehaviour
 
     public GameObject fixedCard;
 
+    Rigidbody cardRg;
+
     // Start is called before the first frame update
     void Start()
     {
+        cardRg = GetComponent<Rigidbody>();
+
         fixedCard.SetActive(false);
         if (panelM == null)  // panelM이 할당되지 않았다면 경고 메시지 출력
         {
@@ -21,7 +25,10 @@ public class CardInsert : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(cardRg != null)
+        {
+            cardRg.constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
