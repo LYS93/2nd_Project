@@ -422,6 +422,7 @@ public class R_Hand_2 : MonoBehaviour
                     hit.collider.gameObject.transform.parent = Rhand.transform;
                     lineR.SetPosition(1, hit.point);
                     hit.collider.gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
+                    StartCoroutine(VibeCard());
                 }
                 if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
@@ -530,6 +531,13 @@ public class R_Hand_2 : MonoBehaviour
     IEnumerator VibeButtons()
     {
         OVRInput.SetControllerVibration(0.1f, 0.5f, OVRInput.Controller.RTouch);
+        yield return new WaitForSeconds(0.1f);
+        OVRInput.SetControllerVibration(0f, 0f, OVRInput.Controller.RTouch);
+    }
+
+    IEnumerator VibeCard()
+    {
+        OVRInput.SetControllerVibration(0.05f, 0.5f, OVRInput.Controller.RTouch);
         yield return new WaitForSeconds(0.1f);
         OVRInput.SetControllerVibration(0f, 0f, OVRInput.Controller.RTouch);
     }

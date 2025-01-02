@@ -93,6 +93,8 @@ public class PanelmanagerScript : MonoBehaviour
 
     public Text errorMessage; // 오류 메시지 표시 (패널 생성 제한 초과 시)
 
+    public GameObject errormessagePanel; // 오류메세지 뒤에 띄울 패널.
+
 
     int[] quan = new int[21];
 
@@ -217,6 +219,7 @@ public class PanelmanagerScript : MonoBehaviour
         price[19] = 2000f;
         price[20] = 1000f;
 
+        errormessagePanel.SetActive(false); // 오류 메시지 패널 초기에는 숨김
         errorMessage.gameObject.SetActive(false); // 오류 메시지 초기에는 숨김
 
         // 게임 시작 시 PlayerPrefs 초기화
@@ -1470,6 +1473,7 @@ public class PanelmanagerScript : MonoBehaviour
     // 오류 메시지를 표시하는 함수
     private void ShowErrorMessage(string message)
     {
+        errormessagePanel.SetActive(true);
         errorMessage.text = message;
         errorMessage.gameObject.SetActive(true); // 오류 메시지를 화면에 표시
         Invoke("HideErrorMessage", 2f); // 2초 후에 오류 메시지를 숨김
@@ -1478,6 +1482,7 @@ public class PanelmanagerScript : MonoBehaviour
     // 오류 메시지를 숨기는 함수
     private void HideErrorMessage()
     {
+        errormessagePanel.SetActive(false);
         errorMessage.gameObject.SetActive(false);
     }
 
