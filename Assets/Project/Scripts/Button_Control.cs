@@ -24,6 +24,8 @@ public class Button_Control : MonoBehaviour
     public GameObject panelHere;
     public GameObject panelCard;
     public GameObject panelCharge;
+    public GameObject panelFinish;
+    public GameObject panelGifticon;
 
     bool startSwitch;
     bool teaselectSwitch;
@@ -52,6 +54,12 @@ public class Button_Control : MonoBehaviour
     public Transform contentParentOther; // 다른 패널의 Content Parent
 
     public GameObject card;
+    public GameObject phone;
+    public GameObject barcode;
+
+    public Text countDownT;
+    float countdown = 10f;
+    bool countStart;
 
     void Start()
     {
@@ -87,12 +95,20 @@ public class Button_Control : MonoBehaviour
         panelCard.SetActive(false);
         panelCharge = GameObject.Find("Panel(Charge)");
         panelCharge.SetActive(false);
+        panelFinish = GameObject.Find("Panel(Finish)");
+        panelFinish.SetActive(false);
+        panelGifticon = GameObject.Find("Panel(ChargeGifticon)");
+        panelGifticon.SetActive(false);
 
         orderItems.Clear();
         totalPrice = 0;
 
         card = GameObject.Find("Card");
         card.SetActive(false);
+        phone = GameObject.Find("Phone");
+        phone.SetActive(false);
+        barcode = GameObject.Find("Barcode");
+        barcode.SetActive(false);
     }
 
 
@@ -131,6 +147,19 @@ public class Button_Control : MonoBehaviour
             panelFoodmenu.SetActive(true);
             foodselectSwitch = true;
         }
+
+        if(countStart)
+        {
+            if (countdown >= 0)
+            {
+                countdown -= Time.deltaTime;
+            }
+            else if(countdown < 0)
+            {
+                EndScene();
+            }
+        }
+        countDownT.text = countdown.ToString("F0");
     }
     public void Restart() //시작화면으로 돌아가는 버튼
     {
@@ -332,7 +361,10 @@ public class Button_Control : MonoBehaviour
         panelFrappemenu.SetActive(false);
         panelFoodmenu.SetActive(false);
         panelCharge.SetActive(false);
+        panelGifticon.SetActive(false);
         card.SetActive(false);
+        phone.SetActive(false);
+        barcode.SetActive(false);
     }
     public void Icetea()
     {
@@ -560,6 +592,8 @@ public class Button_Control : MonoBehaviour
         panelFrappemenu.SetActive(false);
         panelFoodmenu.SetActive(false);
         panelOption.SetActive(false);
+        panelFood.SetActive(false);
+        panelTea.SetActive(false);
     }
     public void Back()
     {
@@ -577,6 +611,8 @@ public class Button_Control : MonoBehaviour
         panelFrappemenu.SetActive(false);
         panelFoodmenu.SetActive(false);
         panelOption.SetActive(false);
+        panelFood.SetActive(false);
+        panelTea.SetActive(false);
     }
     public void Here()
     {
@@ -593,6 +629,8 @@ public class Button_Control : MonoBehaviour
         panelFrappemenu.SetActive(false);
         panelFoodmenu.SetActive(false);
         panelOption.SetActive(false);
+        panelFood.SetActive(false);
+        panelTea.SetActive(false);
     }
     public void Togo()
     {
@@ -609,6 +647,8 @@ public class Button_Control : MonoBehaviour
         panelFrappemenu.SetActive(false);
         panelFoodmenu.SetActive(false);
         panelOption.SetActive(false);
+        panelFood.SetActive(false);
+        panelTea.SetActive(false);
     }
     public void Gifticon()
     {
@@ -625,7 +665,13 @@ public class Button_Control : MonoBehaviour
         panelFrappemenu.SetActive(false);
         panelFoodmenu.SetActive(false);
         panelOption.SetActive(false);
-        panelCharge.SetActive(true);
+        panelCharge.SetActive(false);
+        card.SetActive(false);
+        panelGifticon.SetActive(true);
+        phone.SetActive(true);
+        barcode.SetActive(true);
+        panelFood.SetActive(false);
+        panelTea.SetActive(false);
     }
     public void Card()
     {
@@ -644,8 +690,38 @@ public class Button_Control : MonoBehaviour
         panelOption.SetActive(false);
         panelCharge.SetActive(true);
         card.SetActive(true);
+        panelGifticon.SetActive(false);
+        phone.SetActive(false);
+        barcode.SetActive(false);
+        panelFood.SetActive(false);
+        panelTea.SetActive(false);
     }
     public void Cardcharge()
+    {
+        panelCard.SetActive(false);
+        panelHere.SetActive(false);
+        panelMain.SetActive(false);
+        panelStart.SetActive(false);
+        panelCoffee.SetActive(false);
+        panelFood.SetActive(false);
+        panelTea.SetActive(false);
+        panelCoffeemenu.SetActive(false);
+        panelLattemenu.SetActive(false);
+        panelTeamenu.SetActive(false);
+        panelAdemenu.SetActive(false);
+        panelNonCoffeemenu.SetActive(false);
+        panelFrappemenu.SetActive(false);
+        panelFoodmenu.SetActive(false);
+        panelOption.SetActive(false);
+        panelCharge.SetActive(false);
+        card.SetActive(false);
+        panelGifticon.SetActive(false);
+        phone.SetActive(false);
+        barcode.SetActive(false);
+        panelFinish.SetActive(true);
+        countStart = true;
+    }
+    void EndScene()
     {
         SceneManager.LoadScene("ENDScene");
     }
@@ -861,6 +937,8 @@ public class Button_Control : MonoBehaviour
         panelMain.SetActive(false);
         panelCoffee.SetActive(false);
         panelCoffeemenu.SetActive(false);
+        panelFood.SetActive(false);
+        panelTea.SetActive(false);
         panelCard.SetActive(false);
         panelHere.SetActive(false);
         panelStart.SetActive(false);
