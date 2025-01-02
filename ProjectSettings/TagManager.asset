@@ -25,6 +25,8 @@ TagManager:
   - buttonEtc
   - barPartition
   - confirmPartition
+  - card
+  - cardReader
   layers:
   - Default
   - TransparentFX

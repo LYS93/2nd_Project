@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PanelmanagerScript : MonoBehaviour
 {
@@ -88,6 +89,8 @@ public class PanelmanagerScript : MonoBehaviour
 
     public Text confirmPriceText; // 주문내역 확인창 총 가격 표시
 
+    public Text paymentPrice; // 결제화면 총 가격 표시
+
     public Text errorMessage; // 오류 메시지 표시 (패널 생성 제한 초과 시)
 
 
@@ -114,6 +117,18 @@ public class PanelmanagerScript : MonoBehaviour
 
     // 최대 생성 가능한 패널 수
     public int maxPanels = 8;
+
+    public GameObject paymentPanel; //결제화면 판넬
+
+    public BoxCollider[] boxC; // 버튼의 박스 콜라이더 setActive 껐다켰다.
+
+    public GameObject creditCard; // 신용카드 오브젝트
+    public GameObject fixedcreditCard; // 고정된 신용카드 오브젝트
+
+    public GameObject orderedPanel; // 결제가 완료된 판넬
+
+    public GameObject timerText; // 시간을 표시할 오브젝트
+    float time = 10.0f;
 
 
     // Start is called before the first frame update
@@ -172,6 +187,13 @@ public class PanelmanagerScript : MonoBehaviour
         //panelToZero();
 
         confirmPanel.SetActive(false);
+        paymentPanel.SetActive(false);
+        orderedPanel.SetActive(false);
+        creditCard.SetActive(false);
+        fixedcreditCard.SetActive(false);
+
+        //boxC[0] = GetComponent<BoxCollider>();
+        //boxC[1] = GetComponent<BoxCollider>();
 
         price[0] = 9000f; // panel1 가격 //닭갈비 메뉴
         price[1] = 23000f; // panel2 가격
@@ -240,6 +262,25 @@ public class PanelmanagerScript : MonoBehaviour
             + (quan[10] * price[10]) + (quan[11] * price[11]) + (quan[12] * price[12]) + (quan[13] * price[13]) + (quan[14] * price[14]) + (quan[15] * price[15]) + (quan[16] * price[16]) + (quan[17] * price[17]) + (quan[18] * price[18]) + (quan[19] * price[19]) + (quan[20] * price[20]);
         totalPriceText.text = "총 결제금액: " + totalPrice.ToString() + "원"; // 총 가격 표시
         confirmPriceText.text = "총 주문 금액: " + totalPrice.ToString() + " 원";
+        paymentPrice.text = totalPrice.ToString();
+
+        if (orderedPanel.activeSelf)
+        {
+            if (time > 0)
+            {
+                time -= Time.deltaTime;
+                timerText.GetComponent<Text>().text = time.ToString("F0") + "초 뒤에 엔딩으로 넘어갑니다";
+            }
+            else
+            {
+                SceneManager.LoadScene("ENDScene");
+            }
+        }
+        else
+        {
+            time = 10.0f;
+        }
+        
     }
 
     // 1번 버튼 클릭 시 호출
@@ -1988,5 +2029,23 @@ public class PanelmanagerScript : MonoBehaviour
     }
 
 
+    // 결제화면으로 넘어가기.
+    public void GotoPayment()
+    {
+        boxC[0].enabled = false;
+        boxC[1].enabled = false;
+        paymentPanel.SetActive(true);
+        creditCard.SetActive(true);
+    }
+
+
+    // 결제화면 취소하기.
+    public void ClosePayment()
+    {
+        boxC[0].enabled = true;
+        boxC[1].enabled = true;
+        paymentPanel.SetActive(false);
+        creditCard.SetActive(false);
+    }
 
 }

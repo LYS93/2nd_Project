@@ -29,6 +29,8 @@ public class UImanagerScript : MonoBehaviour
     public GameObject[] bar;
     public GameObject gotoAd;
 
+    AudioSource BGM;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -93,25 +95,27 @@ public class UImanagerScript : MonoBehaviour
             bar[1].SetActive(false); //열린 바의 모습
 
 
-            cate_chick[0].color = changeColor;
-            cate_chick[1].color = changeColor;
-            cate_chick[2].color = changeColor;
-            cate_chick[3].color = changeColor;
+        startCate();
 
-            cate_rice[0].color = returnColor;
-            cate_rice[1].color = returnColor;
-            cate_rice[2].color = returnColor;
-            cate_rice[3].color = returnColor;
+        //cate_chick[0].color = changeColor;
+        //cate_chick[1].color = changeColor;
+        //cate_chick[2].color = changeColor;
+        //cate_chick[3].color = changeColor;
 
-            cate_side[0].color = returnColor;
-            cate_side[1].color = returnColor;
-            cate_side[2].color = returnColor;
-            cate_side[3].color = returnColor;
+        //cate_rice[0].color = returnColor;
+        //cate_rice[1].color = returnColor;
+        //cate_rice[2].color = returnColor;
+        //cate_rice[3].color = returnColor;
 
-            cate_noodle[0].color = returnColor;
-            cate_noodle[1].color = returnColor;
-            cate_noodle[2].color = returnColor;
-            cate_noodle[3].color = returnColor;
+        //cate_side[0].color = returnColor;
+        //cate_side[1].color = returnColor;
+        //cate_side[2].color = returnColor;
+        //cate_side[3].color = returnColor;
+
+        //cate_noodle[0].color = returnColor;
+        //cate_noodle[1].color = returnColor;
+        //cate_noodle[2].color = returnColor;
+        //cate_noodle[3].color = returnColor;
 
 
         //if (cate_chick != null && cate_rice != null)
@@ -130,6 +134,9 @@ public class UImanagerScript : MonoBehaviour
         //    //cate_rice[3].color = returnColor;
 
         //}
+
+        BGM = GetComponent<AudioSource>();
+        BGM.volume = 0.1f;
     }
 
     // Update is called once per frame
@@ -329,12 +336,37 @@ public class UImanagerScript : MonoBehaviour
         Debug.Log("왜 검은화면뜨지?");
 
         bar[0].SetActive(false); 
-        bar[1].SetActive(false); 
+        bar[1].SetActive(false);
+
+        startCate();
 
         Chicken_sc.SetActive(false);
         Rice_sc.SetActive(false);
         Side_sc.SetActive(false);
         Noodle_sc.SetActive(false);
         ad_sc.SetActive(true);
+    }
+
+    public void startCate() // 처음 시작할 때의 카테고리 색상 설정
+    {
+        cate_chick[0].color = changeColor;
+        cate_chick[1].color = changeColor;
+        cate_chick[2].color = changeColor;
+        cate_chick[3].color = changeColor;
+
+        cate_rice[0].color = returnColor;
+        cate_rice[1].color = returnColor;
+        cate_rice[2].color = returnColor;
+        cate_rice[3].color = returnColor;
+
+        cate_side[0].color = returnColor;
+        cate_side[1].color = returnColor;
+        cate_side[2].color = returnColor;
+        cate_side[3].color = returnColor;
+
+        cate_noodle[0].color = returnColor;
+        cate_noodle[1].color = returnColor;
+        cate_noodle[2].color = returnColor;
+        cate_noodle[3].color = returnColor;
     }
 }
