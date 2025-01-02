@@ -18,8 +18,10 @@ public class L_Hand : MonoBehaviour
 
     public GameObject optionScreen;
     GameObject cameraCenter;
+    GameObject cameraRig;
 
     public bool optionSwitch; //옵션창 열림,닫힘을 확인하기위해 
+    public bool moveIn;
 
     void Start()
     {
@@ -32,6 +34,7 @@ public class L_Hand : MonoBehaviour
 
         optionScreen = GameObject.Find("OptionScreen");
         cameraCenter = GameObject.Find("CenterEyeAnchor");
+        cameraRig = GameObject.Find("OVRCameraRig");
         optionScreen.SetActive(false); //시작할때 옵션창 비활성화
 
         if (hitButton01 == true)
@@ -62,6 +65,8 @@ public class L_Hand : MonoBehaviour
 
             if (hit.collider.gameObject.CompareTag("button01")) //시작으로 돌아가는 버튼
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton01 == false)
                 {
                     hitButton01 = true;
@@ -76,6 +81,8 @@ public class L_Hand : MonoBehaviour
             }
             if (hit.collider.gameObject.CompareTag("button02")) //프로그램을 종료하는 버튼
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton02 == false)
                 {
                     hitButton02 = true;
@@ -91,6 +98,8 @@ public class L_Hand : MonoBehaviour
 
             if (hit.collider.gameObject.CompareTag("option"))
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton01 == true)
                 {
                     hitButton01 = false;
@@ -101,6 +110,101 @@ public class L_Hand : MonoBehaviour
                     hitButton02 = false;
                     changeColor02.Invoke(hitButton02);
                 }
+            }
+
+            if (hit.collider.gameObject.CompareTag("foot"))
+            {
+                lineR.material.color = Color.blue;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+                {
+                    if (moveIn == false)
+                    {
+                        cameraRig.transform.position = new Vector3(0.9f, 0.2f, 0.6f);
+                        cameraRig.transform.Rotate(Vector3.up * 90);
+                        moveIn = true;
+                        StartCoroutine(VibeHandle());
+                    }
+                    if (hitButton01 == true)
+                    {
+                        hitButton01 = false;
+                        changeColor01.Invoke(hitButton01);
+                    }
+                    if (hitButton02 == true)
+                    {
+                        hitButton02 = false;
+                        changeColor02.Invoke(hitButton02);
+                    }
+                }
+
+            }
+
+            if (hit.collider.gameObject.CompareTag("start"))
+            {
+                lineR.material.color = Color.blue;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+
+            }
+
+            if (hit.collider.gameObject.CompareTag("home"))
+            {
+                lineR.material.color = Color.blue;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+
+            }
+            if (hit.collider.gameObject.CompareTag("coffee"))
+            {
+                lineR.material.color = Color.blue;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+
+            }
+            if (hit.collider.gameObject.CompareTag("drink"))
+            {
+                lineR.material.color = Color.blue;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+
+            }
+            if (hit.collider.gameObject.CompareTag("food"))
+            {
+                lineR.material.color = Color.blue;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+
+            }
+            if (hit.collider.gameObject.CompareTag("plus"))
+            {
+                lineR.material.color = Color.blue;
+
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
+                {
+                    hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
+                    StartCoroutine(VibeHandle());
+                }
+
             }
         }
         else if (hitButton01 == true)
@@ -113,7 +217,7 @@ public class L_Hand : MonoBehaviour
             hitButton02 = false;
             changeColor02.Invoke(hitButton02);
         }
-        
+
         if (optionScreen.activeSelf == true && optionSwitch == true) //옵션창이 열려있을때
         {
             if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch))

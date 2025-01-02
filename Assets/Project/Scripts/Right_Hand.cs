@@ -25,9 +25,9 @@ public class Right_Hand : MonoBehaviour
     bool hitButton06;
     Coroutine vibeHandle; //버튼 클릭시 진동을 주기위함
 
-    GameObject startScreen; //시작화면
-    GameObject selectScreen; //키오스크 선택화면(스탠드,테이블)
-    GameObject tutorialScreen; //튜토리얼 화면
+    public GameObject startScreen; //시작화면
+    public GameObject selectScreen; //키오스크 선택화면(스탠드,테이블)
+    public GameObject tutorialScreen; //튜토리얼 화면
 
     void Start()
     {
@@ -58,9 +58,11 @@ public class Right_Hand : MonoBehaviour
         {
             lineR.SetPosition(0, ray.origin);
             lineR.SetPosition(1, hit.point); //레이가 콜라이더를 가진 어떤 오브젝트에 부딪히면 거기까지만 보이도록
-
-            if(hit.collider.gameObject.CompareTag("startscreen")) //레이가 시작화면에 부딪히면
+            
+            if (hit.collider.gameObject.CompareTag("startscreen")) //레이가 시작화면에 부딪히면
             {
+                lineR.material.color = Color.blue;
+
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch)) //오른쪽 컨트롤러의 인덱스버튼을 누르면
                 {
                     hit.collider.gameObject.SetActive(false); //해당 시작화면 비활성화
@@ -69,6 +71,8 @@ public class Right_Hand : MonoBehaviour
 
             if(hit.collider.gameObject.CompareTag("button01")) //테그 버튼01(시작버튼)
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton01 == false) //유니티이벤트로 선택된 버튼의 색을 바꾸기위함
                 {
                     hitButton01 = true;
@@ -83,6 +87,8 @@ public class Right_Hand : MonoBehaviour
             }
             if (hit.collider.gameObject.CompareTag("button02")) //테그 버튼02(튜토리얼버튼)
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton02 == false)
                 {
                     hitButton02 = true;
@@ -97,6 +103,8 @@ public class Right_Hand : MonoBehaviour
             }
             if (hit.collider.gameObject.CompareTag("button03")) //테그 버튼03(종료버튼)
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton03 == false)
                 {
                     hitButton03 = true;
@@ -112,6 +120,8 @@ public class Right_Hand : MonoBehaviour
             
             if (hit.collider.gameObject.CompareTag("off")) //튜토리얼 종료버튼
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton06 == false)
                 {
                     hitButton06 = true;
@@ -127,6 +137,8 @@ public class Right_Hand : MonoBehaviour
 
             if (hit.collider.gameObject.CompareTag("stand")) //선택화면에서 스탠드키오스크버튼
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton04 == false) //스탠드키오스크버튼과 테이블키오스크버튼을 옮겨다닐때 색을 바꾸도록
                 {
                     hitButton04 = true;
@@ -146,6 +158,8 @@ public class Right_Hand : MonoBehaviour
             }
             if (hit.collider.gameObject.CompareTag("table")) //선택화면에서 테이블키오스크버튼
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton05 == false)
                 {
                     hitButton05 = true;

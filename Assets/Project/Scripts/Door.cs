@@ -9,11 +9,11 @@ public class Door : MonoBehaviour
     bool openSwitch;
     bool stopSwitch;
 
-    R_Hand Rhand;
+    L_Hand Lhand;
 
     void Start()
     {
-        Rhand = GameObject.Find("rightHand").GetComponent<R_Hand>();
+        Lhand = GameObject.Find("leftHand").GetComponent<L_Hand>();
         openSwitch = false;
     }
 
@@ -36,7 +36,7 @@ public class Door : MonoBehaviour
                 openTime = 0;
             }
         }
-        if(Rhand.moveIn == true && stopSwitch == false)
+        if(Lhand.moveIn == true && stopSwitch == false)
         {
             transform.Translate(Time.deltaTime * moveD, 0, 0);
             openTime += Time.deltaTime;

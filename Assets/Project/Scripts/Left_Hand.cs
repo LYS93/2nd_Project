@@ -24,9 +24,11 @@ public class Left_Hand : MonoBehaviour
     bool hitButton06;
     Coroutine vibeHandle; //버튼 클릭시 진동을 주기위함
 
-    GameObject startScreen; //시작화면
-    GameObject selectScreen; //키오스크 선택화면(스탠드,테이블)
-    GameObject tutorialScreen; //튜토리얼 화면
+    //GameObject startScreen; //시작화면
+    //GameObject selectScreen; //키오스크 선택화면(스탠드,테이블)
+    //GameObject tutorialScreen; //튜토리얼 화면
+
+    Right_Hand rightHand;
 
     void Start()
     {
@@ -37,11 +39,13 @@ public class Left_Hand : MonoBehaviour
 
         lineR = GetComponent<LineRenderer>();
 
-        startScreen = GameObject.Find("StartScreen2");
-        selectScreen = GameObject.Find("SelectScreen");
+        //startScreen = GameObject.Find("StartScreen2");
+        //selectScreen = GameObject.Find("SelectScreen");
         //selectScreen.SetActive(false); //시작할때 선택화면 꺼두기
-        tutorialScreen = GameObject.Find("TutorialScreen");
+        //tutorialScreen = GameObject.Find("TutorialScreen");
         //tutorialScreen.SetActive(false); //시작할때 튜토리얼화면 꺼두기
+
+        rightHand = GameObject.Find("rightHand").GetComponent<Right_Hand>();
     }
 
 
@@ -57,9 +61,11 @@ public class Left_Hand : MonoBehaviour
         {
             lineR.SetPosition(0, ray.origin);
             lineR.SetPosition(1, hit.point); //레이가 콜라이더를 가진 어떤 오브젝트에 부딪히면 거기까지만 보이도록
-
+            
             if (hit.collider.gameObject.CompareTag("startscreen")) //레이가 시작화면에 부딪히면
             {
+                lineR.material.color = Color.blue;
+
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch)) //오른쪽 컨트롤러의 인덱스버튼을 누르면
                 {
                     hit.collider.gameObject.SetActive(false); //해당 시작화면 비활성화
@@ -68,6 +74,8 @@ public class Left_Hand : MonoBehaviour
 
             if (hit.collider.gameObject.CompareTag("button01")) //테그 버튼01(시작버튼)
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton01 == false) //유니티이벤트로 선택된 버튼의 색을 바꾸기위함
                 {
                     hitButton01 = true;
@@ -82,6 +90,8 @@ public class Left_Hand : MonoBehaviour
             }
             if (hit.collider.gameObject.CompareTag("button02")) //테그 버튼02(튜토리얼버튼)
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton02 == false)
                 {
                     hitButton02 = true;
@@ -96,6 +106,8 @@ public class Left_Hand : MonoBehaviour
             }
             if (hit.collider.gameObject.CompareTag("button03")) //테그 버튼03(종료버튼)
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton03 == false)
                 {
                     hitButton03 = true;
@@ -111,6 +123,8 @@ public class Left_Hand : MonoBehaviour
 
             if (hit.collider.gameObject.CompareTag("off")) //튜토리얼 종료버튼
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton06 == false)
                 {
                     hitButton06 = true;
@@ -126,6 +140,8 @@ public class Left_Hand : MonoBehaviour
 
             if (hit.collider.gameObject.CompareTag("stand")) //선택화면에서 스탠드키오스크버튼
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton04 == false) //스탠드키오스크버튼과 테이블키오스크버튼을 옮겨다닐때 색을 바꾸도록
                 {
                     hitButton04 = true;
@@ -145,6 +161,8 @@ public class Left_Hand : MonoBehaviour
             }
             if (hit.collider.gameObject.CompareTag("table")) //선택화면에서 테이블키오스크버튼
             {
+                lineR.material.color = Color.blue;
+
                 if (hitButton05 == false)
                 {
                     hitButton05 = true;
@@ -194,19 +212,19 @@ public class Left_Hand : MonoBehaviour
             changeColor06.Invoke(hitButton06);
         }
 
-        //if (!startScreen.activeSelf) //시작화면이 비활성화되면
-        //{
-        //    selectScreen.SetActive(true); //선택화면 활성화
+        if (!rightHand.startScreen.activeSelf) //시작화면이 비활성화되면
+        {
+            rightHand.selectScreen.SetActive(true); //선택화면 활성화
 
-        //    if (!tutorialScreen.activeSelf) //튜토리얼화면이 비활성화되면
-        //    {
-        //        selectScreen.SetActive(true);
-        //    }
-        //    else if (tutorialScreen.activeSelf) //튜토리얼화면이 활성화되면
-        //    {
-        //        selectScreen.SetActive(false); //선택화면 비활성화
-        //    }
-        //}
+            if (!rightHand.tutorialScreen.activeSelf) //튜토리얼화면이 비활성화되면
+            {
+                rightHand.selectScreen.SetActive(true);
+            }
+            else if (rightHand.tutorialScreen.activeSelf) //튜토리얼화면이 활성화되면
+            {
+                rightHand.selectScreen.SetActive(false); //선택화면 비활성화
+            }
+        }
     }
     IEnumerator VibeHandle() //버튼을 클릭할때 진동을 주기위한 코루틴
     {

@@ -66,7 +66,7 @@ public class Ending : MonoBehaviour
         transform.Translate(0, Time.deltaTime * 0.5f, 0);
 
         // 특정 조건에서 endswitch를 true로 변경
-        if (transform.position.y > 12 && !endswitch)
+        if (transform.position.y > 10 && !endswitch)
         {
             endswitch = true; // 조건이 맞으면 'endswitch'를 true로 설정
         }
