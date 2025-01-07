@@ -29,6 +29,8 @@ public class Right_Hand : MonoBehaviour
     public GameObject selectScreen; //키오스크 선택화면(스탠드,테이블)
     public GameObject tutorialScreen; //튜토리얼 화면
 
+    Start_Screen startSc;
+
     void Start()
     {
         Rhand = GameObject.Find("RightHandAnchor"); //오른손 컨트롤러를 따라다니도록
@@ -43,6 +45,8 @@ public class Right_Hand : MonoBehaviour
         selectScreen.SetActive(false); //시작할때 선택화면 꺼두기
         tutorialScreen = GameObject.Find("TutorialScreen");
         tutorialScreen.SetActive(false); //시작할때 튜토리얼화면 꺼두기
+
+        startSc = GameObject.Find("ButtonController").GetComponent<Start_Screen>();
     }
 
    
@@ -66,6 +70,8 @@ public class Right_Hand : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch)) //오른쪽 컨트롤러의 인덱스버튼을 누르면
                 {
                     hit.collider.gameObject.SetActive(false); //해당 시작화면 비활성화
+                    Debug.Log("이거 맞나");
+                    startSc.howToPlayAudio.Play();
                 }
             }
 
