@@ -6,20 +6,20 @@ public class Foot : MonoBehaviour
 {
     ParticleSystem particle;
 
-    R_Hand Rhand;
+    L_Hand Lhand;
 
     void Start()
     {
         particle = GetComponent<ParticleSystem>();
         particle.Play();
 
-        Rhand = GameObject.Find("rightHand").GetComponent<R_Hand>();
+        Lhand = GameObject.Find("leftHand").GetComponent<L_Hand>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Rhand.moveIn == true)
+        if(Lhand.moveIn == true)
         {
             particle.Stop();
         }
