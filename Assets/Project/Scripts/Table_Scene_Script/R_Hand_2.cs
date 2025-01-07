@@ -34,7 +34,6 @@ public class R_Hand_2 : MonoBehaviour
 
     //스크립트 참조
     PanelmanagerScript panelManager;
-    UImanagerScript uiMananger;
 
     public GameObject KioWindow;// 키오스크 화면 껐다 켰다.
     BoxCollider KioskCol; // 옵션창 띄울때 키오스크의 콜라이더에 옵션창이 막히지 않도록 껐다켰다. 
@@ -314,14 +313,7 @@ public class R_Hand_2 : MonoBehaviour
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
                     StartCoroutine(VibeButtons());
 
-                    //if(panelManager.totalP == 1 && uiMananger.bar[0].activeSelf)
-                    //{
-                    //    clickCate.Stop();
-                    //    clickCate2.Stop();
-
-                    //    clickCheck.Play();
-                    //}
-
+                    
                     if (isMenuClicked == false)
                     {
                         clickCate.Stop();

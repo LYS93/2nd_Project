@@ -36497,6 +36497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelM: {fileID: 1260891599}
   fixedCard: {fileID: 699808129}
+  noButtonCol: {fileID: 152286766}
   myaudio: {fileID: 1321557014}
   dragToInsertCard: {fileID: 724170672}
 --- !u!54 &1384220271
@@ -63491,6 +63492,16 @@ MonoBehaviour:
   optionScreen: {fileID: 0}
   optionSwitch: 0
   KioWindow: {fileID: 34779634}
+  clickFoot: {fileID: 1752674642}
+  clickKiosk: {fileID: 1934769764}
+  clickCate: {fileID: 1617873004}
+  clickCate2: {fileID: 1274504908}
+  clickCheck: {fileID: 969404074}
+  clickChangeQ: {fileID: 1374908220}
+  clickAddOther: {fileID: 1506518061}
+  clickToPay: {fileID: 1338100292}
+  clickToCheckOrder: {fileID: 1208103411}
+  dragToInsertCard: {fileID: 724170672}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
