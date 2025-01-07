@@ -297,6 +297,8 @@ public class L_Hand_2 : MonoBehaviour
                     clickToPay.Stop();
                     clickToCheckOrder.Stop();
                     dragToInsertCard.Stop();
+                    // 모든 Invoke 취소
+                    CancelInvoke();
                 }
             }
 
