@@ -23,6 +23,10 @@ public class Camera_Move : MonoBehaviour
 
     public ParticleSystem footParticle;
 
+    //AudioSource clickFoot; // 01. 발판 선택 멘트.
+
+    //public AudioSource clickKiosk; // 02. 키오스크 화면 누르라는 멘트.
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +39,10 @@ public class Camera_Move : MonoBehaviour
         //Door.transform.position = Vector3.zero;
         //Door.transform.position = new Vector3(3.2f, 0, 0);
 
+        //clickFoot = GameObject.Find("door_move").GetComponent<AudioSource>();
+
         footParticle.Play();
+
     }
 
     // Update is called once per frame
@@ -67,7 +74,9 @@ public class Camera_Move : MonoBehaviour
 
         footParticle.Stop();
 
+        //clickFoot.Stop();
 
+        //clickKiosk.Play();
     }
 
     public void Camera_moveToKiosk() //키오스크 정면 바라보는 메서드

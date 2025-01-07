@@ -8,9 +8,13 @@ public class CardInsert : MonoBehaviour
 
     public GameObject fixedCard;
 
+    public BoxCollider noButtonCol; // 클릭할 수 없게 nobutton의 콜라이더 enabled로 만들기.
+
     Rigidbody cardRg;
 
     public AudioSource myaudio;
+
+    public AudioSource dragToInsertCard; // 09. 카드를 오른쪽 투입구에 넣어주세요 멘트.
 
     // Start is called before the first frame update
     void Start()
@@ -49,12 +53,15 @@ public class CardInsert : MonoBehaviour
             // 카드 리더기 소리 출력
             if (myaudio != null)
             {
+                dragToInsertCard.Stop();
                 myaudio.Play();  // 카드 리더기 소리 재생
             }
 
             // 움직일 수 있는 카드 숨기기, 꽂힌 카드 표시
+            noButtonCol.enabled = false;
             this.gameObject.SetActive(false);
             fixedCard.SetActive(true);
+
 
             // 결제가 완료되었습니다 창 표시
             if (panelM != null)  // panelM이 null이 아닌지 확인

@@ -34,9 +34,37 @@ public class R_Hand_2 : MonoBehaviour
 
     //스크립트 참조
     PanelmanagerScript panelManager;
+    UImanagerScript uiMananger;
 
     public GameObject KioWindow;// 키오스크 화면 껐다 켰다.
     BoxCollider KioskCol; // 옵션창 띄울때 키오스크의 콜라이더에 옵션창이 막히지 않도록 껐다켰다. 
+
+    public AudioSource clickFoot; // 01. 발판 선택 멘트.
+
+    public AudioSource clickKiosk; // 02. 키오스크 화면 누르고 주문하기 멘트.
+
+    public AudioSource clickCate; // 03-1. 키오스크 (카테고리를 눌러) 메뉴선택 멘트.
+
+    public AudioSource clickCate2; // 03-2. 키오스크 메뉴선택 멘트.
+
+    public AudioSource clickCheck; // 04. 장바구니를 눌러 확인 멘트.
+
+    public AudioSource clickChangeQ; // 05. 수량 추가 감소 제거버튼 멘트.
+
+    public AudioSource clickAddOther; // 06. 다른메뉴 추가시 장바구니를 닫기 멘트.
+
+    public AudioSource clickToPay; // 07. 주문하기를 눌러서 결제하기 멘트.
+
+    public AudioSource clickToCheckOrder; // 08. 결제하려면 결제하기/ 취소하려면 취소하기버튼 클릭 멘트.
+
+    public AudioSource dragToInsertCard; // 09. 카드를 오른쪽 투입구에 넣어주세요 멘트.
+
+
+    bool isMenuClicked = false; // 메뉴 클릭을 했는가?
+    bool isBarClicked = false; // 바를 클릭 했는가?
+    bool isSecondPlay = false; // 두번째 플레이인지?
+    bool isMClicked = false; // 첫번째로 클릭했는지?
+    
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +99,7 @@ public class R_Hand_2 : MonoBehaviour
         panelManager = GameObject.Find("PanelManager").GetComponent<PanelmanagerScript>();
 
         KioskCol = GameObject.Find("TKiosk").GetComponent<BoxCollider>();
+
     }
 
     // Update is called once per frame
@@ -138,6 +167,10 @@ public class R_Hand_2 : MonoBehaviour
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
                     ischaracterEnter = true;
+
+                    clickFoot.Stop();
+
+                    clickKiosk.Play();
                 }
             }
 
@@ -151,6 +184,7 @@ public class R_Hand_2 : MonoBehaviour
                     {
                         BoxCol.enabled = false; //추가해야하는지 확인부터
                         cammove.Camera_moveToKiosk();//카메라 이동.
+
                     }
                 }                
             }
@@ -163,6 +197,17 @@ public class R_Hand_2 : MonoBehaviour
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
                     StartCoroutine(VibeButtons());
+
+                    clickKiosk.Stop();
+                    if (isSecondPlay == false) // 처음 플레이를 해봤다면 오디오 출력. 
+                    {
+                        clickCate.Play();
+                        isSecondPlay = true;
+                    }
+                    else if (isSecondPlay == true)
+                    {
+                        clickCate2.Play();
+                    }
                 }
             }
 
@@ -220,6 +265,15 @@ public class R_Hand_2 : MonoBehaviour
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
                     StartCoroutine(VibeButtons());
+
+                    if (isBarClicked == false)
+                    {
+                        clickCheck.Stop();
+
+                        clickChangeQ.Play();
+                        Invoke("clickToAddOther", 12.0f);
+                        isBarClicked = true;
+                    }
                 }
             }
 
@@ -235,22 +289,66 @@ public class R_Hand_2 : MonoBehaviour
                     panelManager.panelToZero();
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
                     StartCoroutine(VibeButtons());
+
+                    isMenuClicked = false;
+                    isBarClicked = false;
+                    isMClicked = false;
+                    clickCate.Stop();
+                    clickCate2.Stop();
+                    clickCheck.Stop();
+                    clickChangeQ.Stop();
+                    clickAddOther.Stop();
+                    clickToPay.Stop();
+                    clickToCheckOrder.Stop();
+                    dragToInsertCard.Stop();
                 }
             }
 
             if (hit.collider.gameObject.CompareTag("menuButton") && !hit.collider.gameObject.CompareTag("barPartition")) //메뉴버튼을 눌렀을때.&& 장바구니 창 뒤로 인식이 안되도록 (내가 넣은 코드.)
             {
-
+                
                 lineR.material.color = Color.blue;
 
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     hit.collider.gameObject.GetComponent<Button>().onClick.Invoke();
                     StartCoroutine(VibeButtons());
+
+                    //if(panelManager.totalP == 1 && uiMananger.bar[0].activeSelf)
+                    //{
+                    //    clickCate.Stop();
+                    //    clickCate2.Stop();
+
+                    //    clickCheck.Play();
+                    //}
+
+                    if (isMenuClicked == false)
+                    {
+                        clickCate.Stop();
+                        clickCate2.Stop();
+
+                        clickCheck.Play();
+                        isMenuClicked = true;
+                    }
+                    else if (isBarClicked == true)
+                    {
+                        if (clickAddOther.isPlaying == true)
+                        {
+                            if (clickToPay.isPlaying == false && isMClicked == false) //음성이 재생이 안되고 있을때 & 한번 클릭되었는지 여부.
+                            {
+                                isMClicked = true;
+                                Debug.Log("왜 안될까??");
+                                Invoke("clickToPay_", 5.0f);
+                            }
+                        }
+                    }
+
+
                 }
 
             }
 
+           
             if (hit.collider.gameObject.CompareTag("buttonEtc") && !hit.collider.gameObject.CompareTag("confirmPartition")) //기타 버튼을 눌렀을때. ex.+ / - / x 버튼. (내가 넣은 코드.)
                                                                                                                             //&& 주문내역 확인창 떴을때 인식 안되도록.
             {
@@ -350,5 +448,15 @@ public class R_Hand_2 : MonoBehaviour
         OVRInput.SetControllerVibration(0.05f, 0.5f, OVRInput.Controller.RTouch);
         yield return new WaitForSeconds(0.1f);
         OVRInput.SetControllerVibration(0f, 0f, OVRInput.Controller.RTouch);
+    }
+
+    void clickToAddOther()
+    {
+        clickAddOther.Play();
+    }
+
+    void clickToPay_()
+    {
+        clickToPay.Play();
     }
 }

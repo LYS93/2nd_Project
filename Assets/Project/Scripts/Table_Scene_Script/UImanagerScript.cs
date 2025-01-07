@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class UImanagerScript : MonoBehaviour
 { 
@@ -30,6 +31,8 @@ public class UImanagerScript : MonoBehaviour
     public GameObject gotoAd;
 
     AudioSource BGM;
+
+    public bool isBarOpen = false; // 장바구니가 열려있는지 아닌지 여부.
 
     // Start is called before the first frame update
     void Start()
@@ -152,6 +155,7 @@ public class UImanagerScript : MonoBehaviour
         gotoAd.SetActive(true);
         bar[0].SetActive(true); //닫혀있는 바의 모습
         bar[1].SetActive(false); //열린 바의 모습
+        isBarOpen = false;
 
 
         //for (int number = 0; number < cate_chick.Length; number++)
@@ -321,11 +325,13 @@ public class UImanagerScript : MonoBehaviour
         {
             bar[0].SetActive(false);
             bar[1].SetActive(true);
+            isBarOpen = true;
         }
         else
         {
             bar[1].SetActive(false);
             bar[0].SetActive(true);
+            isBarOpen = false;
         }
     }
 

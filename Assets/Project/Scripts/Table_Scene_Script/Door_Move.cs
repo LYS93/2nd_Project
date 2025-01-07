@@ -1,3 +1,4 @@
+using Meta.Voice.Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,9 @@ public class Door_Move : MonoBehaviour
 
     Camera_Move camM;
 
-    
+    AudioSource clickFoot; // 01. 발판 선택 멘트.
+
+    bool isAudioPlayed = false; // 오디오가 플레이 되었는지 여부.
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +33,8 @@ public class Door_Move : MonoBehaviour
         //Door.transform.position = new Vector3(3.2f, 0, 0);
 
         camM = GameObject.Find("OVRCameraRig").GetComponent<Camera_Move>();
+
+        clickFoot = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -43,6 +48,12 @@ public class Door_Move : MonoBehaviour
             {
                 speed += Time.deltaTime;
                 Door.transform.Translate(speed * 0.3f * Time.deltaTime, 0, 0);
+            }
+            if (Door.transform.position.x > 3.2f && !isAudioPlayed) // 3.2의 값 보다 크면 오디오 출력.
+            {
+                isAudioPlayed = true;
+                Debug.Log("음@@ 왜안되지?");
+                clickFoot.Play();
             }
         }
 

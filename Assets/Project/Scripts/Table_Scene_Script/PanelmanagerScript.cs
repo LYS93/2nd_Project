@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class PanelmanagerScript : MonoBehaviour
 {
@@ -132,6 +133,12 @@ public class PanelmanagerScript : MonoBehaviour
     public GameObject timerText; // 시간을 표시할 오브젝트
     float time = 10.0f;
 
+    public AudioSource clickCheck; // 04. 장바구니를 눌러 확인 멘트.
+    public AudioSource clickChangeQ; // 05. 수량 추가 감소 제거버튼 멘트.
+    public AudioSource clickAddOther; // 06. 다른메뉴 추가시 장바구니를 닫기 멘트.
+    public AudioSource clickToPay; // 07. 주문하기를 눌러서 결제하기 멘트.
+    public AudioSource clickToCheckOrder; // 08. 결제하려면 결제하기/ 취소하려면 취소하기버튼 클릭 멘트.
+    public AudioSource dragToInsertCard; // 09. 카드를 오른쪽 투입구에 넣어주세요 멘트.
 
     // Start is called before the first frame update
     void Start()
@@ -1536,7 +1543,13 @@ public class PanelmanagerScript : MonoBehaviour
         Debug.Log("Order saved!");
 
         confirmPanel.SetActive(true);
-        
+        clickCheck.Stop();
+        clickChangeQ.Stop();
+        clickAddOther.Stop();
+        clickToPay.Stop();
+        clickToPay.Stop();
+        clickToCheckOrder.Play();
+
         // 저장된 값을 새 UI Text에 표시
         DisplaySavedQuantities();
 
@@ -1546,6 +1559,7 @@ public class PanelmanagerScript : MonoBehaviour
     public void CloseConfirmClick()
     {
         confirmPanel.SetActive(false);
+        clickToCheckOrder.Stop();
     }
 
     // 저장된 값을 새 UI Text에 표시
@@ -2041,6 +2055,8 @@ public class PanelmanagerScript : MonoBehaviour
         boxC[1].enabled = false;
         paymentPanel.SetActive(true);
         creditCard.SetActive(true);
+        clickToCheckOrder.Stop();
+        dragToInsertCard.Play();
     }
 
 
@@ -2051,6 +2067,7 @@ public class PanelmanagerScript : MonoBehaviour
         boxC[1].enabled = true;
         paymentPanel.SetActive(false);
         creditCard.SetActive(false);
+        dragToInsertCard.Stop();
     }
 
 }
