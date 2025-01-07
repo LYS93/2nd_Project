@@ -12,7 +12,7 @@ public class Ending : MonoBehaviour
     private bool endswitch = false; // 상태를 트래킹할 변수
 
     private float timer = 0f; // 5초 유지 시간을 위한 타이머
-
+        
     public GameObject printer;
 
     void Start()

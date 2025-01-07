@@ -8,6 +8,8 @@ public class Button_Con : MonoBehaviour
     GameObject menu;
     public GameObject tutorial;
 
+    public AudioSource selectAudio;
+
     void Start()
     {
         menu = GameObject.Find("SelectMenuScreen");
@@ -23,6 +25,7 @@ public class Button_Con : MonoBehaviour
     public void MenuOpen() //스탠드,테이블 선택화면 열기버튼
     {
         menu.SetActive(true);
+        selectAudio.Play();
     }
     public void OpenStand() //스탠드키오스크버튼
     {
