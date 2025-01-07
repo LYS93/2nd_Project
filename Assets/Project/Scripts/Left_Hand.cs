@@ -30,6 +30,8 @@ public class Left_Hand : MonoBehaviour
 
     Right_Hand rightHand;
 
+    Start_Screen startSc;
+
     void Start()
     {
         Lhand = GameObject.Find("LeftHandAnchor"); //오른손 컨트롤러를 따라다니도록
@@ -46,6 +48,8 @@ public class Left_Hand : MonoBehaviour
         //tutorialScreen.SetActive(false); //시작할때 튜토리얼화면 꺼두기
 
         rightHand = GameObject.Find("rightHand").GetComponent<Right_Hand>();
+
+        startSc = GameObject.Find("ButtonController").GetComponent<Start_Screen>();
     }
 
 
@@ -69,6 +73,7 @@ public class Left_Hand : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch)) //오른쪽 컨트롤러의 인덱스버튼을 누르면
                 {
                     hit.collider.gameObject.SetActive(false); //해당 시작화면 비활성화
+                    startSc.StopCoroutineAndPlayAudio();
                 }
             }
 

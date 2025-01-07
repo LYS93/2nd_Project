@@ -70,8 +70,7 @@ public class Right_Hand : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch)) //오른쪽 컨트롤러의 인덱스버튼을 누르면
                 {
                     hit.collider.gameObject.SetActive(false); //해당 시작화면 비활성화
-                    Debug.Log("이거 맞나");
-                    startSc.howToPlayAudio.Play();
+                    startSc.StopCoroutineAndPlayAudio();
                 }
             }
 
