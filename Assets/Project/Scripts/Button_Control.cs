@@ -61,6 +61,17 @@ public class Button_Control : MonoBehaviour
     float countdown = 10f;
     bool countStart;
 
+    L_Hand Lhand;
+
+    bool oneTime;
+    bool twoTime;
+    bool threeTime;
+    float oneTimeStat;
+
+    AudioSource audioS;
+    public AudioClip[] narration;
+    public int narrationCount; 
+
     void Start()
     {
         panelStart = GameObject.Find("Panel(start)");
@@ -109,6 +120,18 @@ public class Button_Control : MonoBehaviour
         phone.SetActive(false);
         barcode = GameObject.Find("Barcode");
         barcode.SetActive(false);
+
+        Lhand = GameObject.Find("leftHand").GetComponent<L_Hand>();
+        
+        audioS = gameObject.AddComponent<AudioSource>();
+
+        narrationCount = 0;
+
+        if (narrationCount == 0)
+        {
+            audioS.PlayOneShot(narration[0]);
+            narrationCount++;
+        }
     }
 
 
@@ -160,6 +183,46 @@ public class Button_Control : MonoBehaviour
             }
         }
         countDownT.text = countdown.ToString("F0");
+
+        if(Lhand.moveIn == true && narrationCount == 1)
+        {
+            audioS.PlayOneShot(narration[1]);
+            narrationCount++;
+        }
+
+        if (oneTime == true)
+        {
+            oneTimeStat += Time.deltaTime;
+            if (oneTimeStat >= 13f)
+            {
+                oneTime = false;
+                twoTime = true;
+                oneTimeStat = 0;
+            }
+        }
+        if (threeTime == true)
+        {
+            oneTimeStat += Time.deltaTime;
+            if (oneTimeStat >= 3f)
+            {
+                threeTime = false;
+                twoTime = true;
+                oneTimeStat = 0;
+            }
+        }
+
+        if (narrationCount == 6 && twoTime == true)
+        {
+            audioS.PlayOneShot(narration[6]);
+            narrationCount++;
+            twoTime = false;
+        }
+        if (narrationCount == 10 && twoTime == true)
+        {
+            audioS.PlayOneShot(narration[10]);
+            narrationCount++;
+            twoTime = false;
+        }
     }
     public void Restart() //시작화면으로 돌아가는 버튼
     {
@@ -179,6 +242,11 @@ public class Button_Control : MonoBehaviour
         panelMain.SetActive(true);
         panelStart.SetActive(false);
         panelCoffee.SetActive(true);
+        if (narrationCount == 2)
+        {
+            audioS.PlayOneShot(narration[2]);
+            narrationCount++;
+        }
     }
     public void Gostart()
     {
@@ -577,6 +645,13 @@ public class Button_Control : MonoBehaviour
 
         AddOrder(finalMenuName, finalPrice);
         ResetCurrentSelections(); // 현재 선택 초기화
+
+        if (narrationCount == 5)
+        {
+            audioS.PlayOneShot(narration[5]);
+            narrationCount++;
+            oneTime = true;
+        }        
     }
     public void Payment()
     {
@@ -594,6 +669,11 @@ public class Button_Control : MonoBehaviour
         panelOption.SetActive(false);
         panelFood.SetActive(false);
         panelTea.SetActive(false);
+        if (narrationCount == 7)
+        {
+            audioS.PlayOneShot(narration[7]);
+            narrationCount++;
+        }
     }
     public void Back()
     {
@@ -631,6 +711,11 @@ public class Button_Control : MonoBehaviour
         panelOption.SetActive(false);
         panelFood.SetActive(false);
         panelTea.SetActive(false);
+        if (narrationCount == 8)
+        {
+            audioS.PlayOneShot(narration[8]);
+            narrationCount++;
+        }
     }
     public void Togo()
     {
@@ -649,6 +734,11 @@ public class Button_Control : MonoBehaviour
         panelOption.SetActive(false);
         panelFood.SetActive(false);
         panelTea.SetActive(false);
+        if (narrationCount == 8)
+        {
+            audioS.PlayOneShot(narration[8]);
+            narrationCount++;
+        }
     }
     public void Gifticon()
     {
@@ -672,6 +762,11 @@ public class Button_Control : MonoBehaviour
         barcode.SetActive(true);
         panelFood.SetActive(false);
         panelTea.SetActive(false);
+        if (narrationCount == 9)
+        {
+            audioS.PlayOneShot(narration[12]);
+            narrationCount = 11;
+        }
     }
     public void Card()
     {
@@ -695,6 +790,12 @@ public class Button_Control : MonoBehaviour
         barcode.SetActive(false);
         panelFood.SetActive(false);
         panelTea.SetActive(false);
+        if (narrationCount == 9)
+        {
+            audioS.PlayOneShot(narration[9]);
+            narrationCount++;
+            threeTime = true;
+        }
     }
     public void Cardcharge()
     {
@@ -720,6 +821,11 @@ public class Button_Control : MonoBehaviour
         barcode.SetActive(false);
         panelFinish.SetActive(true);
         countStart = true;
+        if (narrationCount == 11)
+        {
+            audioS.PlayOneShot(narration[11]);
+            narrationCount++;
+        }
     }
     void EndScene()
     {
@@ -795,6 +901,11 @@ public class Button_Control : MonoBehaviour
         else
         {
             Debug.Log($"옵션 '{optionName}'은 이미 추가되었습니다.");
+        }
+        if (narrationCount == 4)
+        {
+            audioS.PlayOneShot(narration[4]);
+            narrationCount++;
         }
     }
     void UpdateMenuCountText()
@@ -948,6 +1059,11 @@ public class Button_Control : MonoBehaviour
         panelNonCoffeemenu.SetActive(false);
         panelFrappemenu.SetActive(false);
         panelFoodmenu.SetActive(false);
+        if(narrationCount == 3)
+        {
+            audioS.PlayOneShot(narration[3]);
+            narrationCount++;
+        }
     }
 }
 
